@@ -1,298 +1,1137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitHub Clone - Home</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
-    }
-    body {
-      background: linear-gradient(135deg, #2c3e50, #4ca1af);
-      color: #24292e;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
-    header {
-      background-color: #24292e;
-      padding: 16px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      animation: fadeInDown 1s ease;
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    header h1 {
-      color: #ffffff;
-      font-size: 1.8rem;
-    }
-    nav a {
-      color: #ffffff;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #4a90e2;
-    }
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      background: linear-gradient(135deg, #1d4350, #a43931);
-      color: white;
-      padding: 20px;
-      animation: fadeIn 1.5s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .hero h2 {
-      font-size: 3rem;
-      margin-bottom: 15px;
-    }
-    .hero p {
-      font-size: 1.3rem;
-      max-width: 600px;
-    }
-    .button-container {
-      margin-top: 25px;
-    }
-    .button {
-      padding: 12px 30px;
-      margin: 10px;
-      font-size: 1rem;
-      font-weight: bold;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      transition: all 0.3s;
-      animation: slideInUp 1.2s ease;
-    }
-    @keyframes slideInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .button:hover {
-      transform: scale(1.1);
-    }
-    .primary {
-      background-color: #28a745;
-      color: white;
-    }
-    .primary:hover {
-      background-color: #218838;
-    }
-    .secondary {
-      background-color: #007bff;
-      color: white;
-    }
-    .secondary:hover {
-      background-color: #0056b3;
-    }
-    .notes-container {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #f8f9fa;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      width: 60%;
-      max-width: 800px;
-      text-align: left;
-      z-index: 1001;
-      animation: fadeIn 0.5s ease-in-out;
-    }
-    .notes-container h3 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-      color: #333;
-    }
-    .notes-container textarea {
-      width: 100%;
-      height: 200px;
-      margin-bottom: 15px;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      resize: both;
-      font-size: 1rem;
-      box-sizing: border-box;
-    }
-    .notes-container button {
-      background-color: #007bff;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background-color 0.3s;
-    }
-    .notes-container button:hover {
-      background-color: #0056b3;
-    }
-    .close-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: none;
-      border: none;
-      font-size: 1.2rem;
-      cursor: pointer;
-      color: #888;
-    }
-    .features, .pricing {
-      padding: 60px 20px;
-      text-align: center;
-      background-color: #ffffff;
-      animation: fadeIn 1.5s ease-in-out;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #24292e;
-      color: white;
-      margin-top: 40px;
-      animation: fadeInUp 1s ease;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet-Friendly Travel Companion</title>
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --primary-light: #34495E;
+            --primary-dark: #1A252F;
+            --secondary: #16A085;
+            --secondary-light: #1ABC9C;
+            --accent: #E74C3C;
+            --accent-light: #E67E22;
+            --highlight: #3498DB;
+            --highlight-light: #5DADE2;
+            --background: #F8F9FA;
+            --card: #FFFFFF;
+            --card-dark: #F0F0F0;
+            --text: #333333;
+            --text-light: #7F8C8D;
+            --success: #27AE60;
+            --success-light: #2ECC71;
+            --warning: #F39C12;
+            --error: #E74C3C;
+            --border: #DEE2E6;
+            --purple: #9B59B6;
+            --pink: #E91E63;
+            --yellow: #F1C40F;
+            --chat-bg: #F5F9FC;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header styles */
+        .header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .accent-bar {
+            background-color: var(--secondary);
+            height: 4px;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        /* Status bar */
+        .status-bar {
+            background-color: var(--primary-light);
+            color: white;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        .status-indicator span {
+            margin-right: 5px;
+        }
+
+        .status-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: gray;
+        }
+
+        .status-dot.online {
+            background-color: var(--success);
+        }
+
+        .status-dot.offline {
+            background-color: var(--error);
+        }
+
+        .refresh-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .refresh-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Main content */
+        .main-content {
+            display: flex;
+            flex: 1;
+            padding: 10px;
+            gap: 10px;
+        }
+
+        /* Left panel - Search form */
+        .left-panel {
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-card {
+            background-color: var(--card);
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .form-card h2 {
+            color: var(--primary);
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .search-btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .search-btn:hover {
+            background-color: var(--secondary-light);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            background-color: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0;
+            background-color: var(--highlight);
+            animation: progress 2s ease-in-out infinite;
+        }
+
+        @keyframes progress {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Right panel - Results */
+        .right-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: -1px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: var(--card-dark);
+            border: 1px solid var(--border);
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+
+        .tab.active {
+            background-color: var(--card);
+            border-bottom: 1px solid var(--card);
+        }
+
+        .tab-content {
+            display: none;
+            flex: 1;
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 0 0 5px 5px;
+            padding: 15px;
+            overflow: auto;
+        }
+
+        .tab-content.active {
+            display: flex;
+        }
+
+        /* Places tab */
+        .places-container {
+            display: flex;
+            flex: 1;
+            height: 100%;
+        }
+
+        .places-list {
+            width: 30%;
+            background-color: var(--card);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .places-list h3 {
+            color: var(--primary);
+            font-size: 16px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .place-item {
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+
+        .place-item:hover {
+            background-color: var(--card-dark);
+        }
+
+        .place-item.selected {
+            background-color: var(--highlight-light);
+            color: white;
+        }
+
+        .place-details {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .place-details h3 {
+            color: var(--primary);
+            font-size: 16px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 5px;
+        }
+
+        /* Tips tab */
+        .tips-content {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .tips-content h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .tips-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .tips-content li {
+            margin-bottom: 5px;
+        }
+
+        .important {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Chat tab */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .chat-display {
+            flex: 1;
+            background-color: var(--chat-bg);
+            padding: 15px;
+            overflow-y: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .chat-message {
+            margin-bottom: 15px;
+        }
+
+        .chat-message.user {
+            color: var(--primary);
+        }
+
+        .chat-message.assistant {
+            color: var(--secondary);
+        }
+
+        .chat-message.system {
+            color: var(--text-light);
+        }
+
+        .chat-message.error {
+            color: var(--error);
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+
+        .chat-input button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .chat-input button:hover {
+            background-color: var(--secondary-light);
+        }
+
+        /* Status bar at bottom */
+        .footer-status {
+            background-color: var(--primary-light);
+            color: white;
+            padding: 8px 15px;
+            font-size: 12px;
+        }
+
+        /* Text styling classes */
+        .text-title {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .text-description {
+            color: var(--text);
+        }
+
+        .text-address {
+            color: var(--primary);
+        }
+
+        .text-positive {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .text-negative {
+            color: var(--error);
+            font-weight: bold;
+        }
+
+        .text-section {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .text-rating {
+            color: var(--warning);
+            font-weight: bold;
+        }
+
+        .text-feature {
+            color: var(--success-light);
+        }
+
+        .text-policy {
+            color: var(--error);
+        }
+
+        .text-hours {
+            color: var(--purple);
+        }
+
+        .text-tip {
+            color: var(--highlight);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+            .left-panel {
+                width: 100%;
+            }
+            .places-list {
+                width: 40%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .places-container {
+                flex-direction: column;
+            }
+            .places-list {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                max-height: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>GitHub Clone</h1>
-    <nav>
-      <a href="#features">Features</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#">Sign In</a>
-    </nav>
-  </header>
+    <div class="container">
+        <header class="header">
+            <h1>🐾 Pet-Friendly Travel Companion</h1>
+            <div class="accent-bar"></div>
+        </header>
 
-  <div class="hero">
-    <h2>Welcome to GitHub Clone!</h2>
-    <p>Your platform for seamless collaboration and code management.</p>
-    <div class="button-container">
-      <a href="#" class="button primary"><i class="fas fa-code"></i> Open Code Editor</a>
-      <a href="#" class="button secondary" onclick="openUploadModal()"><i class="fas fa-upload"></i> Upload</a>
-      <a href="#" class="button primary" onclick="openDownloadModal()"><i class="fas fa-download"></i> Download</a>
-      <a href="#" class="button secondary" onclick="shareProject()"><i class="fas fa-share"></i> Share Project</a>
-      <a href="#" class="button primary" onclick="openNotes()"><i class="fas fa-sticky-note"></i> Notes</a>
+        <div class="status-bar">
+            <div class="status-indicators">
+                <div class="status-indicator">
+                    <span>Internet:</span>
+                    <div class="status-dot" id="internet-status"></div>
+                </div>
+                <div class="status-indicator">
+                    <span>API:</span>
+                    <div class="status-dot" id="api-status"></div>
+                </div>
+            </div>
+            <button class="refresh-btn" id="refresh-status">⟳ Refresh Status</button>
+        </div>
+
+        <div class="main-content">
+            <div class="left-panel">
+                <div class="form-card">
+                    <h2>Trip Details</h2>
+                    <div class="form-group">
+                        <label for="location">📍 Location/City:</label>
+                        <input type="text" id="location" class="form-control" placeholder="Enter location">
+                    </div>
+                    <div class="form-group">
+                        <label for="place-type">🏨 Place Type:</label>
+                        <select id="place-type" class="form-control">
+                            <option value="">Select place type</option>
+                            <option value="Hotel">Hotel</option>
+                            <option value="Restaurant">Restaurant</option>
+                            <option value="Park">Park</option>
+                            <option value="Cafe">Cafe</option>
+                            <option value="Beach">Beach</option>
+                            <option value="Trail">Trail</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="custom-place-group" style="display: none;">
+                        <label for="custom-place">✏️ Custom Place Type:</label>
+                        <input type="text" id="custom-place" class="form-control" placeholder="Enter custom place type">
+                    </div>
+                    <div class="form-group">
+                        <label for="pet-type">🐶 Pet Type:</label>
+                        <select id="pet-type" class="form-control">
+                            <option value="">Select pet type</option>
+                            <option value="Dog">Dog</option>
+                            <option value="Cat">Cat</option>
+                            <option value="Bird">Bird</option>
+                            <option value="Rabbit">Rabbit</option>
+                            <option value="Reptile">Reptile</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="custom-pet-group" style="display: none;">
+                        <label for="custom-pet">✏️ Custom Pet Type:</label>
+                        <input type="text" id="custom-pet" class="form-control" placeholder="Enter custom pet type">
+                    </div>
+                    <button class="search-btn" id="search-btn">🔍 Find Pet-Friendly Places</button>
+                </div>
+
+                <div class="progress-bar" id="progress-bar">
+                    <div class="progress-bar-fill"></div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="tabs">
+                    <div class="tab active" data-tab="places">Places</div>
+                    <div class="tab" data-tab="tips">Travel Tips</div>
+                    <div class="tab" data-tab="chat">Chat with Gemini</div>
+                </div>
+
+                <div class="tab-content active" id="places-tab">
+                    <div class="places-container">
+                        <div class="places-list">
+                            <h3>🏆 Recommended Places</h3>
+                            <div id="places-list"></div>
+                        </div>
+                        <div class="place-details">
+                            <h3>📋 Place Details</h3>
+                            <div id="place-details"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="tips-tab">
+                    <div class="tips-content" id="travel-tips"></div>
+                </div>
+
+                <div class="tab-content" id="chat-tab">
+                    <div class="chat-container">
+                        <div class="chat-display" id="chat-display"></div>
+                        <div class="chat-input">
+                            <input type="text" id="chat-input" placeholder="Type your message...">
+                            <button id="send-btn">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-status">
+            <span id="status-text">Checking internet and API status...</span>
+        </div>
     </div>
-  </div>
 
-  <div class="notes-container" id="notes">
-    <h3>Notes</h3>
-    <button class="close-button" onclick="closeNotes()">&times;</button>
-    <textarea id="noteText"></textarea>
-    <input type="text" id="fileName" placeholder="Enter file name">
-    <button onclick="saveNotes()">Save to Drive</button>
-  </div>
+    <script>
+        // Application state
+        const appState = {
+            internetStatus: false,
+            apiStatus: false,
+            modelName: null,
+            placeData: [],
+            currentPlaceIndex: -1,
+            chatHistory: []
+        };
 
-  <div class="upload-modal" id="uploadModal" style="display: none;">
-    <h3>Upload File</h3>
-    <button class="close-button" onclick="closeUploadModal()">&times;</button>
-    <input type="file" id="fileInput">
-    <input type="text" id="uploadFileName" placeholder="Enter file name">
-    <button onclick="uploadFile()">Upload</button>
-  </div>
+        // DOM elements
+        const elements = {
+            internetStatus: document.getElementById('internet-status'),
+            apiStatus: document.getElementById('api-status'),
+            refreshStatusBtn: document.getElementById('refresh-status'),
+            statusText: document.getElementById('status-text'),
+            locationInput: document.getElementById('location'),
+            placeTypeSelect: document.getElementById('place-type'),
+            customPlaceGroup: document.getElementById('custom-place-group'),
+            customPlaceInput: document.getElementById('custom-place'),
+            petTypeSelect: document.getElementById('pet-type'),
+            customPetGroup: document.getElementById('custom-pet-group'),
+            customPetInput: document.getElementById('custom-pet'),
+            searchBtn: document.getElementById('search-btn'),
+            progressBar: document.getElementById('progress-bar'),
+            placesList: document.getElementById('places-list'),
+            placeDetails: document.getElementById('place-details'),
+            travelTips: document.getElementById('travel-tips'),
+            chatDisplay: document.getElementById('chat-display'),
+            chatInput: document.getElementById('chat-input'),
+            sendBtn: document.getElementById('send-btn'),
+            tabs: document.querySelectorAll('.tab'),
+            tabContents: document.querySelectorAll('.tab-content')
+        };
 
-  <div class="download-modal" id="downloadModal" style="display: none;">
-    <h3>Download File</h3>
-    <button class="close-button" onclick="closeDownloadModal()">&times;</button>
-    <input type="text" id="downloadFileName" placeholder="Enter file name">
-    <button onclick="downloadFile()">Download</button>
-  </div>
+        // Event listeners
+        elements.placeTypeSelect.addEventListener('change', () => {
+            elements.customPlaceGroup.style.display = 
+                elements.placeTypeSelect.value === 'Other' ? 'block' : 'none';
+        });
 
-  <footer>
-    <p>&copy; 2025 GitHub Clone. All rights reserved.</p>
-  </footer>
+        elements.petTypeSelect.addEventListener('change', () => {
+            elements.customPetGroup.style.display = 
+                elements.petTypeSelect.value === 'Other' ? 'block' : 'none';
+        });
 
-  <script>
-    const driveLink = "https://drive.google.com/drive/folders/1XGBKBBAZ2NCuqPhjauK6m7WQpNsSqvWu?usp=drive_link";
+        elements.searchBtn.addEventListener('click', startSearch);
+        elements.refreshStatusBtn.addEventListener('click', checkConnectivity);
+        elements.sendBtn.addEventListener('click', sendChatMessage);
+        elements.chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendChatMessage();
+        });
 
-    function openUploadModal() {
-      document.getElementById('uploadModal').style.display = 'block';
-    }
+        // Tab switching
+        elements.tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                elements.tabs.forEach(t => t.classList.remove('active'));
+                elements.tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(`${tabId}-tab`).classList.add('active');
+            });
+        });
 
-    function closeUploadModal() {
-      document.getElementById('uploadModal').style.display = 'none';
-    }
+        // Initialize the app
+        function init() {
+            checkConnectivity();
+        }
 
-    function uploadFile() {
-      const fileInput = document.getElementById('fileInput');
-      const fileName = document.getElementById('uploadFileName').value;
-      if (fileInput.files.length > 0 && fileName) {
-        alert(`File "${fileName}" uploaded to Google Drive!`);
-        closeUploadModal();
-      } else {
-        alert("Please select a file and enter a file name.");
-      }
-    }
+        // Check internet and API connectivity
+        function checkConnectivity() {
+            // Simulate internet check
+            elements.internetStatus.className = 'status-dot';
+            elements.apiStatus.className = 'status-dot';
+            elements.statusText.textContent = 'Checking internet and API status...';
+            
+            // Simulate internet connection check
+            setTimeout(() => {
+                appState.internetStatus = Math.random() > 0.2; // 80% chance of success for demo
+                updateStatusIndicator(elements.internetStatus, appState.internetStatus);
+                
+                if (!appState.internetStatus) {
+                    elements.statusText.textContent = 'No internet connection. Please check your network.';
+                    return;
+                }
+                
+                // Simulate API check
+                setTimeout(() => {
+                    appState.apiStatus = Math.random() > 0.2; // 80% chance of success for demo
+                    updateStatusIndicator(elements.apiStatus, appState.apiStatus);
+                    
+                    if (appState.apiStatus) {
+                        appState.modelName = 'gemini-pro';
+                        elements.statusText.textContent = `Ready to search using ${appState.modelName} model`;
+                    } else {
+                        elements.statusText.textContent = 'API Error: Unable to connect to service';
+                    }
+                }, 1000);
+            }, 500);
+        }
 
-    function openDownloadModal() {
-      document.getElementById('downloadModal').style.display = 'block';
-    }
+        function updateStatusIndicator(element, status) {
+            element.classList.add(status ? 'online' : 'offline');
+        }
 
-    function closeDownloadModal() {
-      document.getElementById('downloadModal').style.display = 'none';
-    }
+        // Start search process
+        function startSearch() {
+            const location = elements.locationInput.value.trim();
+            const placeType = getPlaceType();
+            const petType = getPetType();
 
-    function downloadFile() {
-      const fileName = document.getElementById('downloadFileName').value;
-      if (fileName) {
-        alert(`File "${fileName}" downloaded from Google Drive!`);
-        closeDownloadModal();
-      } else {
-        alert("Please enter a file name.");
-      }
-    }
+            // Validate inputs
+            if (!location) {
+                alert('Please enter a location.');
+                return;
+            }
+            if (!placeType) {
+                alert('Please select or enter a place type.');
+                return;
+            }
+            if (!petType) {
+                alert('Please select or enter a pet type.');
+                return;
+            }
 
-    function shareProject() {
-      alert(`Project shared via Google Drive: ${driveLink}`);
-    }
+            // Clear previous results
+            elements.placesList.innerHTML = '';
+            elements.placeDetails.innerHTML = '';
+            elements.travelTips.innerHTML = '';
+            elements.chatDisplay.innerHTML = '';
+            appState.placeData = [];
+            appState.currentPlaceIndex = -1;
+            appState.chatHistory = [];
 
-    function openNotes() {
-      document.getElementById('notes').style.display = 'block';
-    }
+            // Show progress bar
+            elements.progressBar.style.display = 'block';
+            elements.statusText.textContent = `Searching for pet-friendly ${placeType}s in ${location}...`;
 
-    function closeNotes() {
-      document.getElementById('notes').style.display = 'none';
-    }
+            // Simulate search with timeout (in a real app, this would be an API call)
+            setTimeout(() => {
+                performSearch(location, placeType, petType);
+            }, 1500);
+        }
 
-    function saveNotes() {
-      const noteText = document.getElementById('noteText').value;
-      const fileName = document.getElementById('fileName').value;
-      if (noteText && fileName) {
-        alert(`Notes saved as "${fileName}" to Google Drive!`);
-        closeNotes();
-      } else {
-        alert("Please enter notes and a file name.");
-      }
-    }
-  </script>
+        function getPlaceType() {
+            return elements.placeTypeSelect.value === 'Other' 
+                ? elements.customPlaceInput.value.trim() 
+                : elements.placeTypeSelect.value.trim();
+        }
+
+        function getPetType() {
+            return elements.petTypeSelect.value === 'Other' 
+                ? elements.customPetInput.value.trim() 
+                : elements.petTypeSelect.value.trim();
+        }
+
+        // Perform the search (simulated with generated data)
+        function performSearch(location, placeType, petType) {
+            try {
+                if (!appState.internetStatus || !appState.apiStatus) {
+                    alert('No internet connection or API access. Please check your network.');
+                    return;
+                }
+
+                // Generate random places and tips (in a real app, this would come from an API)
+                const { places, tips } = generateRandomPlaces(location, placeType, petType);
+                
+                // Update UI with results
+                updateResults(places, tips);
+                
+            } catch (error) {
+                alert(`Search failed: ${error.message}`);
+                elements.statusText.textContent = `Search failed: ${error.message}`;
+            } finally {
+                elements.progressBar.style.display = 'none';
+            }
+        }
+
+        // Update the UI with search results
+        function updateResults(places, tips) {
+            appState.placeData = places;
+
+            // Update places list
+            if (places.length > 0) {
+                places.forEach((place, index) => {
+                    const placeElement = document.createElement('div');
+                    placeElement.className = 'place-item';
+                    placeElement.textContent = `${index + 1}. ${place.name}`;
+                    placeElement.addEventListener('click', () => displayPlaceDetails(index));
+                    elements.placesList.appendChild(placeElement);
+                });
+
+                // Select first place
+                elements.placesList.firstChild.classList.add('selected');
+                displayPlaceDetails(0);
+                elements.statusText.textContent = `Found ${places.length} pet-friendly places.`;
+            } else {
+                elements.placeDetails.innerHTML = 'No places found. Try adjusting your search criteria.';
+                elements.statusText.textContent = 'No places found.';
+            }
+
+            // Update travel tips
+            if (tips) {
+                // Format the tips with better styling
+                const tipLines = tips.split('\n');
+                let html = '';
+                
+                tipLines.forEach(line => {
+                    if (line.startsWith('Travel Tips:')) {
+                        html += `<h3>${line}</h3>`;
+                    } else if (line.trim().endsWith(':')) {
+                        html += `<h4>${line}</h4>`;
+                    } else if (line.trim().startsWith('•') || line.trim().startsWith('-') || line.trim().startsWith('*')) {
+                        html += `<p>→ ${line.substring(1).trim()}</p>`;
+                    } else if (line.toLowerCase().includes('important') || line.toLowerCase().includes('warning') || line.toLowerCase().includes('note')) {
+                        html += `<p class="important">${line}</p>`;
+                    } else if (line.trim()) {
+                        html += `<p>${line}</p>`;
+                    } else {
+                        html += '<br>';
+                    }
+                });
+
+                elements.travelTips.innerHTML = html;
+            }
+        }
+
+        // Display place details
+        function displayPlaceDetails(index) {
+            appState.currentPlaceIndex = index;
+            const place = appState.placeData[index];
+            
+            // Clear previous selection
+            document.querySelectorAll('.place-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Set new selection
+            elements.placesList.children[index].classList.add('selected');
+            
+            // Clean the details text before displaying
+            let details = place.details;
+            details = details.replace(/\*\*([^*]+)\*\*/g, '$1'); // Remove bold
+            details = details.replace(/\*([^*]+)\*/g, '$1'); // Remove italics
+            details = details.replace(/`([^`]+)`/g, '$1'); // Remove code
+
+            // Split the details into sections
+            const sections = details.split('\n\n');
+            let html = '';
+
+            for (const section of sections) {
+                if (!section.trim()) continue;
+
+                // Check for common section headers
+                if (section.toLowerCase().startsWith('name:')) {
+                    const name = section.replace('Name:', '').trim();
+                    html += `<h3 class="text-title">${name}</h3>`;
+                    html += `<div class="text-title">${'─'.repeat(name.length)}</div><br>`;
+                } 
+                else if (section.toLowerCase().startsWith('address:')) {
+                    html += `<h4 class="text-section">📍 Address</h4>`;
+                    html += `<p class="text-address">${section.replace('Address:', '').trim()}</p><br>`;
+                } 
+                else if (section.toLowerCase().startsWith('rating:')) {
+                    html += `<h4 class="text-section">⭐ Rating</h4>`;
+                    let ratingText = section.replace('Rating:', '').trim();
+                    if (!/\d/.test(ratingText)) {
+                        ratingText = `${(Math.random() * 1.5 + 3.5).toFixed(1)}/5 (estimated)`;
+                    }
+                    html += `<p class="text-rating">${ratingText}</p><br>`;
+                } 
+                else if (section.toLowerCase().startsWith('description:')) {
+                    html += `<h4 class="text-section">📝 Description</h4>`;
+                    html += `<p class="text-description">${section.replace('Description:', '').trim()}</p><br>`;
+                } 
+                else if (section.toLowerCase().includes('feature') || section.toLowerCase().includes('amenit')) {
+                    html += `<h4 class="text-section">✅ Pet-Friendly Features</h4>`;
+                    html += formatList(section);
+                } 
+                else if (section.toLowerCase().includes('policy') || section.toLowerCase().includes('restriction')) {
+                    html += `<h4 class="text-section">⚠️ Policies & Restrictions</h4>`;
+                    html += formatList(section);
+                } 
+                else if (section.toLowerCase().includes('hour') || section.toLowerCase().includes('open')) {
+                    html += `<h4 class="text-section">🕒 Hours</h4>`;
+                    let hoursText = section.replace('Hours:', '').trim();
+                    if (!hoursText || hoursText.length < 5) {
+                        hoursText = generateRandomHours();
+                    }
+                    html += `<p class="text-hours">${hoursText.replace(/\n/g, '<br>')}</p><br>`;
+                } 
+                else if (section.toLowerCase().includes('tip') || section.toLowerCase().includes('advice')) {
+                    html += `<h4 class="text-section">💡 Tips for Visiting</h4>`;
+                    html += formatList(section);
+                } 
+                else {
+                    html += `<p class="text-description">${section}</p><br>`;
+                }
+            }
+
+            elements.placeDetails.innerHTML = html;
+        }
+
+        // Helper function to format lists
+        function formatList(text) {
+            const lines = text.split('\n');
+            let html = '';
+            for (const line of lines) {
+                if (line.trim().startsWith('•') || line.trim().startsWith('-') || line.trim().startsWith('*')) {
+                    html += `<p>• ${line.substring(1).trim()}</p>`;
+                } else if (line.trim()) {
+                    html += `<p>${line}</p>`;
+                }
+            }
+            return html + '<br>';
+        }
+
+        // Generate random opening hours
+        function generateRandomHours() {
+            const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+            let hours = [];
+            for (const day of days) {
+                if (Math.random() > 0.2) { // 80% chance of being open
+                    let openHour = Math.floor(Math.random() * 4) + 7; // 7-10
+                    let closeHour = Math.floor(Math.random() * 6) + 17; // 17-22
+                    if (day === "Saturday" || day === "Sunday") {
+                        openHour = Math.floor(Math.random() * 4) + 8; // 8-11
+                    }
+                    const openTime = `${openHour}:${Math.random() > 0.5 ? '00' : '30'}`;
+                    const closeTime = `${closeHour}:${Math.random() > 0.5 ? '00' : '30'}`;
+                    hours.push(`${day}: ${openTime} - ${closeTime}`);
+                } else {
+                    hours.push(`${day}: Closed`);
+                }
+            }
+            return hours.join('\n');
+        }
+
+        // Generate random pet-friendly places
+        function generateRandomPlaces(location, placeType, petType) {
+            const petAdjectives = {
+                "Dog": ["dog-friendly", "puppy-approved", "canine-welcoming"],
+                "Cat": ["cat-friendly", "feline-approved", "kitty-welcoming"],
+                "Bird": ["bird-friendly", "avian-approved", "feathered-welcoming"],
+                "Rabbit": ["rabbit-friendly", "bunny-approved", "hoppy-welcoming"],
+                "Reptile": ["reptile-friendly", "scaly-approved", "cold-blooded-welcoming"],
+                "Other": ["pet-friendly", "animal-approved", "creature-welcoming"]
+            };
+
+            const adjectives = petAdjectives[petType] || petAdjectives["Other"];
+            const features = [
+                "Water bowls provided", "Pet treats available", "Designated pet areas",
+                "Pet waste stations", "Outdoor seating available", "Pet-friendly staff",
+                "Nearby walking trails", "Pet first-aid kit available"
+            ];
+            const policies = [
+                "Must be leashed at all times", "Current vaccinations required",
+                "Maximum 2 pets per guest", "Pets must be supervised",
+                "No aggressive breeds allowed", "Pet fee may apply"
+            ];
+            const additionalInfo = [
+                `Pet capacity: ${Math.floor(Math.random() * 16) + 5} pets at a time`,
+                `Staff trained in pet first aid: ${Math.random() > 0.3 ? 'Yes' : 'No'}`,
+                `Emergency vet contact: ${Math.random() > 0.4 ? 'Provided' : 'Not provided'}`,
+                `Outdoor seating: ${Math.random() > 0.2 ? 'Available' : 'Limited'}`,
+                `Pet events: ${['Weekly', 'Monthly', 'Seasonal', 'None'][Math.floor(Math.random() * 4)]}`
+            ];
+
+            const places = [];
+            for (let i = 1; i <= 5; i++) {
+                const name = `${adjectives[Math.floor(Math.random() * adjectives.length)].toUpperCase()} ${placeType} #${i}`;
+                const rating = (Math.random() * 1.5 + 3.5).toFixed(1);
+                const streets = ['Main', 'Oak', 'Pine', 'Maple'];
+                const address = `${Math.floor(Math.random() * 900) + 100} ${streets[Math.floor(Math.random() * streets.length)]} St, ${location}`;
+                const hours = generateRandomHours();
+
+                // Select random features and policies
+                const selectedFeatures = [];
+                const featureCount = Math.floor(Math.random() * 3) + 3;
+                while (selectedFeatures.length < featureCount) {
+                    const randomFeature = features[Math.floor(Math.random() * features.length)];
+                    if (!selectedFeatures.includes(randomFeature)) {
+                        selectedFeatures.push(randomFeature);
+                    }
+                }
+
+                const selectedPolicies = [];
+                const policyCount = Math.floor(Math.random() * 2) + 2;
+                while (selectedPolicies.length < policyCount) {
+                    const randomPolicy = policies[Math.floor(Math.random() * policies.length)];
+                    if (!selectedPolicies.includes(randomPolicy)) {
+                        selectedPolicies.push(randomPolicy);
+                    }
+                }
+
+                const selectedAdditional = [];
+                const additionalCount = Math.floor(Math.random() * 3) + 2;
+                while (selectedAdditional.length < additionalCount) {
+                    const randomAdditional = additionalInfo[Math.floor(Math.random() * additionalInfo.length)];
+                    if (!selectedAdditional.includes(randomAdditional)) {
+                        selectedAdditional.push(randomAdditional);
+                    }
+                }
+
+                // Create bullet point lists
+                const featureBullets = selectedFeatures.map(f => `• ${f}`).join('\n');
+                const policyBullets = selectedPolicies.map(p => `• ${p}`).join('\n');
+                const additionalBullets = selectedAdditional.map(a => `• ${a}`).join('\n');
+
+                // Build details
+                const details = `
+Name: ${name}
+Address: ${address}
+Rating: ${rating}/5
+
+Description:
+This ${placeType.toLowerCase()} in ${location} is known for being exceptionally welcoming to ${petType.toLowerCase()}s. 
+It offers a comfortable environment for both humans and pets.
+
+Pet-Friendly Features:
+${featureBullets}
+
+Policies:
+${policyBullets}
+
+Additional Information:
+${additionalBullets}
+
+Hours:
+${hours}
+
+Tips for Visiting:
+• Visit during off-peak hours for a more relaxed experience
+• Bring your pet's favorite toys or bedding
+• Ask staff about any current pet promotions
+• Check the weather if utilizing outdoor areas
+`.trim();
+
+                places.push({
+                    name: name,
+                    details: details
+                });
+            }
+
+            // Generate travel tips
+            const tips = `
+Travel Tips for ${petType} Owners in ${location}:
+
+1. Always carry a copy of your pet's vaccination records
+2. Pack extra water and snacks for your pet
+3. Research local veterinary clinics before your trip
+4. Check the weather forecast for pet-friendly activities
+5. Bring familiar toys or bedding to help your pet feel comfortable
+6. Have your pet microchipped or wear ID tags with contact info
+7. Take frequent breaks during travel for your pet's comfort
+8. Keep a pet first-aid kit handy
+
+General Advice:
+• Always call ahead to confirm pet policies
+• Be mindful of other guests and clean up after your pet
+• Consider your pet's temperament when planning activities
+• Have a backup plan in case your pet becomes stressed
+`.trim();
+
+            return { places, tips };
+        }
+
+        // Send chat message
+        function sendChatMessage() {
+            if (appState.currentPlaceIndex === -1 || appState.placeData.length === 0) {
+                alert('Please select a place first.');
+                return;
+            }
+
+            const message = elements.chatInput.value.trim();
+            if (!message) {
+                alert('Please enter a message.');
+                return;
+            }
+
+            const place = appState.placeData[appState.currentPlaceIndex];
+            const placeName = place.name;
+
+            // Add user message to chat
+            addToChat(`You: ${message}`, 'user');
+
+            try {
+                // Disable input while "thinking"
+                elements.chatInput.value = '';
+                elements.chatInput.disabled = true;
+                elements.sendBtn.disabled = true;
+                addToChat('Gemini is thinking...', 'system');
+
+                // In a real app, this would be an API call to Gemini
+                setTimeout(() => {
+                    // Remove the "thinking" message
+                    const chatLines = elements.chatDisplay.children;
+                    if (chatLines.length > 0) {
+                        elements.chatDisplay.removeChild(chatLines[chatLines.length - 1]);
+                    }
+
+                    // Generate a simulated response
+                    const responses = [
+                        `${placeName} is very welcoming to pets! They have several pet-friendly amenities including water bowls and designated pet areas.`,
+                        `Based on the information, ${placeName} requires pets to be leashed at all times and has a maximum of 2 pets per guest.`,
+                        `I recommend calling ${placeName} ahead of your visit to confirm their current pet policies as they may change seasonally.`,
+                        `Visitors to ${placeName} with pets often recommend bringing your pet's favorite blanket to help them feel more comfortable in the new environment.`,
+                        `${placeName} has received positive feedback from pet owners, with many noting the staff's friendliness toward animals.`
+                    ];
+
+                    const answer = responses[Math.floor(Math.random() * responses.length)];
+                    addToChat(`Gemini: ${answer}`, 'assistant');
+
+                    // Re-enable input
+                    elements.chatInput.disabled = false;
+                    elements.sendBtn.disabled = false;
+                    elements.chatInput.focus();
+                }, 1500);
+
+            } catch (error) {
+                addToChat(`Error: ${error.message}`, 'error');
+                elements.chatInput.disabled = false;
+                elements.sendBtn.disabled = false;
+            }
+        }
+
+        // Add message to chat display
+        function addToChat(message, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.className = `chat-message ${sender}`;
+            messageElement.textContent = message;
+            elements.chatDisplay.appendChild(messageElement);
+            elements.chatDisplay.scrollTop = elements.chatDisplay.scrollHeight;
+        }
+
+        // Initialize the application
+        init();
+    </script>
 </body>
 </html>
