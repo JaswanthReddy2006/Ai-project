@@ -3,1135 +3,994 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet-Friendly Travel Companion</title>
+    <title>TravelVax - Vaccine Recommendations for Travelers</title>
     <style>
         :root {
-            --primary: #2C3E50;
-            --primary-light: #34495E;
-            --primary-dark: #1A252F;
-            --secondary: #16A085;
-            --secondary-light: #1ABC9C;
-            --accent: #E74C3C;
-            --accent-light: #E67E22;
-            --highlight: #3498DB;
-            --highlight-light: #5DADE2;
-            --background: #F8F9FA;
-            --card: #FFFFFF;
-            --card-dark: #F0F0F0;
-            --text: #333333;
-            --text-light: #7F8C8D;
-            --success: #27AE60;
-            --success-light: #2ECC71;
-            --warning: #F39C12;
-            --error: #E74C3C;
-            --border: #DEE2E6;
-            --purple: #9B59B6;
-            --pink: #E91E63;
-            --yellow: #F1C40F;
-            --chat-bg: #F5F9FC;
+            --primary-color: #4285f4;
+            --secondary-color: #34a853;
+            --accent-color: #fbbc05;
+            --danger-color: #ea4335;
+            --light-bg: #f8f9fa;
+            --dark-bg: #212529;
+            --text-color: #333;
+            --light-text: #f8f9fa;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: var(--background);
-            color: var(--text);
+            background-color: var(--light-bg);
+            color: var(--text-color);
             line-height: 1.6;
         }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        /* Header styles */
-        .header {
-            background-color: var(--primary);
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 20px;
+            padding: 1.5rem;
             text-align: center;
-            position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .header h1 {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .accent-bar {
-            background-color: var(--secondary);
-            height: 4px;
-            width: 100%;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-        }
-
-        /* Status bar */
-        .status-bar {
-            background-color: var(--primary-light);
-            color: white;
-            padding: 8px 15px;
+        .logo {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            font-size: 12px;
+            justify-content: center;
+            margin-bottom: 0.5rem;
         }
 
-        .status-indicator {
-            display: flex;
-            align-items: center;
-            margin-right: 15px;
+        .logo-icon {
+            font-size: 2rem;
+            margin-right: 0.5rem;
         }
 
-        .status-indicator span {
-            margin-right: 5px;
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
 
-        .status-dot {
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background-color: gray;
+        .search-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
         }
 
-        .status-dot.online {
-            background-color: var(--success);
+        .search-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
         }
 
-        .status-dot.offline {
-            background-color: var(--error);
-        }
-
-        .refresh-btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .refresh-btn:hover {
-            background-color: var(--primary-dark);
-        }
-
-        /* Main content */
-        .main-content {
-            display: flex;
-            flex: 1;
-            padding: 10px;
-            gap: 10px;
-        }
-
-        /* Left panel - Search form */
-        .left-panel {
-            width: 300px;
+        .search-form {
             display: flex;
             flex-direction: column;
-        }
-
-        .form-card {
-            background-color: var(--card);
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 10px;
-            border: 1px solid var(--border);
-        }
-
-        .form-card h2 {
-            color: var(--primary);
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 15px;
+            gap: 1rem;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 14px;
+        label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
-        .form-control {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            font-size: 14px;
+        select {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            font-size: 1rem;
         }
 
-        .search-btn {
-            background-color: var(--secondary);
+        button {
+            background-color: var(--primary-color);
             color: white;
             border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
+            padding: 0.75rem;
+            border-radius: 5px;
+            font-size: 1rem;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            width: 100%;
-            margin-top: 10px;
+            transition: background-color 0.3s ease;
+            margin-top: 1rem;
+            font-weight: 600;
         }
 
-        .search-btn:hover {
-            background-color: var(--secondary-light);
+        button:hover {
+            background-color: #3367d6;
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 5px;
-            background-color: var(--border);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 10px;
+        .results-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             display: none;
         }
 
-        .progress-bar-fill {
-            height: 100%;
-            width: 0;
-            background-color: var(--highlight);
-            animation: progress 2s ease-in-out infinite;
-        }
-
-        @keyframes progress {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        /* Right panel - Results */
-        .right-panel {
-            flex: 1;
+        .country-info {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .country-flag {
+            width: 60px;
+            height: 40px;
+            object-fit: cover;
+            margin-right: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .vaccines-header {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .vaccine-list {
+            list-style: none;
+        }
+
+        .vaccine-item {
+            background-color: var(--light-bg);
+            margin-bottom: 1rem;
+            padding: 1.25rem;
+            border-radius: 5px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .vaccine-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .vaccine-icon {
+            margin-right: 0.5rem;
+        }
+
+        .vaccine-info {
+            margin-bottom: 0.5rem;
+        }
+
+        .risk-high {
+            border-left-color: var(--danger-color);
+        }
+
+        .risk-high .vaccine-name {
+            color: var(--danger-color);
+        }
+
+        .risk-medium {
+            border-left-color: var(--accent-color);
+        }
+
+        .risk-medium .vaccine-name {
+            color: #d18700;
+        }
+
+        .loader {
+            display: none;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .alert-info {
+            background-color: rgba(66, 133, 244, 0.1);
+            border-left: 4px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .alert-warning {
+            background-color: rgba(251, 188, 5, 0.1);
+            border-left: 4px solid var(--accent-color);
+            color: #d18700;
+        }
+
+        .additional-info {
+            margin-top: 2rem;
+        }
+
+        .additional-info h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .travel-tips {
+            background-color: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        .tips-list {
+            list-style: none;
+        }
+
+        .tips-list li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .tip-icon {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .error-message {
+            color: var(--danger-color);
+            margin-bottom: 1rem;
+            font-weight: 500;
+            display: none;
+        }
+
+        .health-facts {
+            margin-top: 2rem;
+            background-color: rgba(66, 133, 244, 0.05);
+            padding: 1.5rem;
+            border-radius: 5px;
+        }
+
+        .health-facts h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
         }
 
         .tabs {
             display: flex;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: -1px;
+            margin-top: 2rem;
+            border-bottom: 1px solid #ddd;
         }
 
         .tab {
-            padding: 10px 20px;
+            padding: 0.75rem 1.5rem;
             cursor: pointer;
-            background-color: var(--card-dark);
-            border: 1px solid var(--border);
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
             border-bottom: none;
             border-radius: 5px 5px 0 0;
             margin-right: 5px;
         }
 
         .tab.active {
-            background-color: var(--card);
-            border-bottom: 1px solid var(--card);
+            background-color: white;
+            border-bottom: 1px solid white;
+            margin-bottom: -1px;
+            font-weight: 600;
+            color: var(--primary-color);
         }
 
         .tab-content {
             display: none;
-            flex: 1;
-            background-color: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 0 0 5px 5px;
-            padding: 15px;
-            overflow: auto;
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-top: none;
+            background-color: white;
         }
 
         .tab-content.active {
-            display: flex;
-        }
-
-        /* Places tab */
-        .places-container {
-            display: flex;
-            flex: 1;
-            height: 100%;
-        }
-
-        .places-list {
-            width: 30%;
-            background-color: var(--card);
-            border-right: 1px solid var(--border);
-            overflow-y: auto;
-            padding: 10px;
-        }
-
-        .places-list h3 {
-            color: var(--primary);
-            font-size: 16px;
-            margin-bottom: 10px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .place-item {
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 4px;
-            margin-bottom: 5px;
-        }
-
-        .place-item:hover {
-            background-color: var(--card-dark);
-        }
-
-        .place-item.selected {
-            background-color: var(--highlight-light);
-            color: white;
-        }
-
-        .place-details {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-        }
-
-        .place-details h3 {
-            color: var(--primary);
-            font-size: 16px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 5px;
-        }
-
-        /* Tips tab */
-        .tips-content {
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .tips-content h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .tips-content ul {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-
-        .tips-content li {
-            margin-bottom: 5px;
-        }
-
-        .important {
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        /* Chat tab */
-        .chat-container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .chat-display {
-            flex: 1;
-            background-color: var(--chat-bg);
-            padding: 15px;
-            overflow-y: auto;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        .chat-message {
-            margin-bottom: 15px;
-        }
-
-        .chat-message.user {
-            color: var(--primary);
-        }
-
-        .chat-message.assistant {
-            color: var(--secondary);
-        }
-
-        .chat-message.system {
-            color: var(--text-light);
-        }
-
-        .chat-message.error {
-            color: var(--error);
-        }
-
-        .chat-input {
-            display: flex;
-            gap: 10px;
-        }
-
-        .chat-input input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-        }
-
-        .chat-input button {
-            background-color: var(--secondary);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .chat-input button:hover {
-            background-color: var(--secondary-light);
-        }
-
-        /* Status bar at bottom */
-        .footer-status {
-            background-color: var(--primary-light);
-            color: white;
-            padding: 8px 15px;
-            font-size: 12px;
-        }
-
-        /* Text styling classes */
-        .text-title {
-            color: var(--primary);
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .text-description {
-            color: var(--text);
-        }
-
-        .text-address {
-            color: var(--primary);
-        }
-
-        .text-positive {
-            color: var(--success);
-            font-weight: bold;
-        }
-
-        .text-negative {
-            color: var(--error);
-            font-weight: bold;
-        }
-
-        .text-section {
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        .text-rating {
-            color: var(--warning);
-            font-weight: bold;
-        }
-
-        .text-feature {
-            color: var(--success-light);
-        }
-
-        .text-policy {
-            color: var(--error);
-        }
-
-        .text-hours {
-            color: var(--purple);
-        }
-
-        .text-tip {
-            color: var(--highlight);
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 992px) {
-            .main-content {
-                flex-direction: column;
-            }
-            .left-panel {
-                width: 100%;
-            }
-            .places-list {
-                width: 40%;
-            }
+            display: block;
         }
 
         @media (max-width: 768px) {
-            .places-container {
+            .search-form {
                 flex-direction: column;
             }
-            .places-list {
-                width: 100%;
-                border-right: none;
-                border-bottom: 1px solid var(--border);
-                max-height: 200px;
+            
+            .country-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .country-flag {
+                margin-bottom: 1rem;
+            }
+            
+            .tabs {
+                flex-direction: column;
+                border-bottom: none;
+            }
+            
+            .tab {
+                margin-right: 0;
+                margin-bottom: 5px;
+                border-radius: 5px;
+                border: 1px solid #ddd;
+            }
+            
+            .tab.active {
+                border-bottom: 1px solid #ddd;
+                margin-bottom: 5px;
             }
         }
     </style>
 </head>
 <body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">💉</div>
+            <h1>TravelVax</h1>
+        </div>
+        <p>Get recommended vaccines for your travel destinations</p>
+    </header>
+
     <div class="container">
-        <header class="header">
-            <h1>🐾 Pet-Friendly Travel Companion</h1>
-            <div class="accent-bar"></div>
-        </header>
-
-        <div class="status-bar">
-            <div class="status-indicators">
-                <div class="status-indicator">
-                    <span>Internet:</span>
-                    <div class="status-dot" id="internet-status"></div>
-                </div>
-                <div class="status-indicator">
-                    <span>API:</span>
-                    <div class="status-dot" id="api-status"></div>
-                </div>
+        <div class="search-container">
+            <div class="search-header">
+                <h2>Find Travel Vaccine Recommendations</h2>
+                <p>Select a country to see recommended vaccinations for your trip</p>
             </div>
-            <button class="refresh-btn" id="refresh-status">⟳ Refresh Status</button>
+            
+            <div class="error-message" id="errorMessage"></div>
+            
+            <form class="search-form" id="searchForm">
+                <div class="form-group">
+                    <label for="country">Destination Country:</label>
+                    <select id="country" required>
+                        <option value="">Select a country</option>
+                        <!-- Countries will be populated by JavaScript -->
+                    </select>
+                </div>
+                
+                <button type="submit">Get Recommendations</button>
+            </form>
         </div>
-
-        <div class="main-content">
-            <div class="left-panel">
-                <div class="form-card">
-                    <h2>Trip Details</h2>
-                    <div class="form-group">
-                        <label for="location">📍 Location/City:</label>
-                        <input type="text" id="location" class="form-control" placeholder="Enter location">
-                    </div>
-                    <div class="form-group">
-                        <label for="place-type">🏨 Place Type:</label>
-                        <select id="place-type" class="form-control">
-                            <option value="">Select place type</option>
-                            <option value="Hotel">Hotel</option>
-                            <option value="Restaurant">Restaurant</option>
-                            <option value="Park">Park</option>
-                            <option value="Cafe">Cafe</option>
-                            <option value="Beach">Beach</option>
-                            <option value="Trail">Trail</option>
-                            <option value="Shopping">Shopping</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group" id="custom-place-group" style="display: none;">
-                        <label for="custom-place">✏️ Custom Place Type:</label>
-                        <input type="text" id="custom-place" class="form-control" placeholder="Enter custom place type">
-                    </div>
-                    <div class="form-group">
-                        <label for="pet-type">🐶 Pet Type:</label>
-                        <select id="pet-type" class="form-control">
-                            <option value="">Select pet type</option>
-                            <option value="Dog">Dog</option>
-                            <option value="Cat">Cat</option>
-                            <option value="Bird">Bird</option>
-                            <option value="Rabbit">Rabbit</option>
-                            <option value="Reptile">Reptile</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group" id="custom-pet-group" style="display: none;">
-                        <label for="custom-pet">✏️ Custom Pet Type:</label>
-                        <input type="text" id="custom-pet" class="form-control" placeholder="Enter custom pet type">
-                    </div>
-                    <button class="search-btn" id="search-btn">🔍 Find Pet-Friendly Places</button>
-                </div>
-
-                <div class="progress-bar" id="progress-bar">
-                    <div class="progress-bar-fill"></div>
-                </div>
-            </div>
-
-            <div class="right-panel">
-                <div class="tabs">
-                    <div class="tab active" data-tab="places">Places</div>
-                    <div class="tab" data-tab="tips">Travel Tips</div>
-                    <div class="tab" data-tab="chat">Chat with Gemini</div>
-                </div>
-
-                <div class="tab-content active" id="places-tab">
-                    <div class="places-container">
-                        <div class="places-list">
-                            <h3>🏆 Recommended Places</h3>
-                            <div id="places-list"></div>
-                        </div>
-                        <div class="place-details">
-                            <h3>📋 Place Details</h3>
-                            <div id="place-details"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="tips-tab">
-                    <div class="tips-content" id="travel-tips"></div>
-                </div>
-
-                <div class="tab-content" id="chat-tab">
-                    <div class="chat-container">
-                        <div class="chat-display" id="chat-display"></div>
-                        <div class="chat-input">
-                            <input type="text" id="chat-input" placeholder="Type your message...">
-                            <button id="send-btn">Send</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
+        <div class="loader" id="loader">
+            <div class="spinner"></div>
+            <p>Fetching vaccine recommendations...</p>
         </div>
-
-        <div class="footer-status">
-            <span id="status-text">Checking internet and API status...</span>
+        
+        <div class="results-container" id="resultsContainer">
+            <div class="country-info" id="countryInfo">
+                <!-- Will be populated by JavaScript -->
+            </div>
+            
+            <div class="alert alert-info">
+                <strong>Note:</strong> These recommendations are general guidelines. Please consult with a healthcare provider for personalized medical advice.
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="vaccines">Recommended Vaccines</div>
+                <div class="tab" data-tab="health">Health Info</div>
+                <div class="tab" data-tab="tips">Travel Tips</div>
+            </div>
+            
+            <div class="tab-content active" id="vaccinesTab">
+                <h3 class="vaccines-header">Recommended Vaccines</h3>
+                <ul class="vaccine-list" id="vaccineList">
+                    <!-- Will be populated by JavaScript -->
+                </ul>
+            </div>
+            
+            <div class="tab-content" id="healthTab">
+                <h3>Local Health Information</h3>
+                <div class="health-facts" id="healthInfo">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="tab-content" id="tipsTab">
+                <h3>Travel Health Tips</h3>
+                <div class="travel-tips">
+                    <ul class="tips-list">
+                        <li><span class="tip-icon">✓</span> Schedule your vaccines 4-6 weeks before travel to ensure full immunity</li>
+                        <li><span class="tip-icon">✓</span> Carry a record of your vaccinations during your trip</li>
+                        <li><span class="tip-icon">✓</span> Pack a travel health kit with first-aid supplies and medications</li>
+                        <li><span class="tip-icon">✓</span> Research healthcare facilities at your destination before departing</li>
+                        <li><span class="tip-icon">✓</span> Check if travel insurance covers medical evacuation in emergencies</li>
+                        <li><span class="tip-icon">✓</span> Keep hydrated and use safe water sources</li>
+                        <li><span class="tip-icon">✓</span> Use insect repellent in areas with mosquito-borne diseases</li>
+                        <li><span class="tip-icon">✓</span> Avoid eating uncooked foods or drinking untreated water</li>
+                        <li><span class="tip-icon">✓</span> Bring prescription medications in original packaging with doctor's notes</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
+    
+    <footer>
+        <p>&copy; 2025 TravelVax | Providing travel health information</p>
+        <p>This site provides information for educational purposes only. Always consult a healthcare professional before travel.</p>
+    </footer>
 
     <script>
-        // Application state
-        const appState = {
-            internetStatus: false,
-            apiStatus: false,
-            modelName: null,
-            placeData: [],
-            currentPlaceIndex: -1,
-            chatHistory: []
-        };
+        // DOM Elements
+        const countrySelect = document.getElementById('country');
+        const searchForm = document.getElementById('searchForm');
+        const loader = document.getElementById('loader');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const countryInfo = document.getElementById('countryInfo');
+        const vaccineList = document.getElementById('vaccineList');
+        const healthInfo = document.getElementById('healthInfo');
+        const errorMessage = document.getElementById('errorMessage');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        // API endpoints and configuration
+        const REST_COUNTRIES_API = 'https://restcountries.com/v3.1';
+        const GEMINI_API_KEY = 'AIzaSyCBhTkjvvVDYopdn8_MPv6fTalSMTsSW3c';
+        const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent';
 
-        // DOM elements
-        const elements = {
-            internetStatus: document.getElementById('internet-status'),
-            apiStatus: document.getElementById('api-status'),
-            refreshStatusBtn: document.getElementById('refresh-status'),
-            statusText: document.getElementById('status-text'),
-            locationInput: document.getElementById('location'),
-            placeTypeSelect: document.getElementById('place-type'),
-            customPlaceGroup: document.getElementById('custom-place-group'),
-            customPlaceInput: document.getElementById('custom-place'),
-            petTypeSelect: document.getElementById('pet-type'),
-            customPetGroup: document.getElementById('custom-pet-group'),
-            customPetInput: document.getElementById('custom-pet'),
-            searchBtn: document.getElementById('search-btn'),
-            progressBar: document.getElementById('progress-bar'),
-            placesList: document.getElementById('places-list'),
-            placeDetails: document.getElementById('place-details'),
-            travelTips: document.getElementById('travel-tips'),
-            chatDisplay: document.getElementById('chat-display'),
-            chatInput: document.getElementById('chat-input'),
-            sendBtn: document.getElementById('send-btn'),
-            tabs: document.querySelectorAll('.tab'),
-            tabContents: document.querySelectorAll('.tab-content')
-        };
-
-        // Event listeners
-        elements.placeTypeSelect.addEventListener('change', () => {
-            elements.customPlaceGroup.style.display = 
-                elements.placeTypeSelect.value === 'Other' ? 'block' : 'none';
-        });
-
-        elements.petTypeSelect.addEventListener('change', () => {
-            elements.customPetGroup.style.display = 
-                elements.petTypeSelect.value === 'Other' ? 'block' : 'none';
-        });
-
-        elements.searchBtn.addEventListener('click', startSearch);
-        elements.refreshStatusBtn.addEventListener('click', checkConnectivity);
-        elements.sendBtn.addEventListener('click', sendChatMessage);
-        elements.chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendChatMessage();
-        });
-
-        // Tab switching
-        elements.tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Remove active class from all tabs and contents
-                elements.tabs.forEach(t => t.classList.remove('active'));
-                elements.tabContents.forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked tab and corresponding content
-                tab.classList.add('active');
-                const tabId = tab.getAttribute('data-tab');
-                document.getElementById(`${tabId}-tab`).classList.add('active');
-            });
-        });
-
-        // Initialize the app
-        function init() {
-            checkConnectivity();
-        }
-
-        // Check internet and API connectivity
-        function checkConnectivity() {
-            // Simulate internet check
-            elements.internetStatus.className = 'status-dot';
-            elements.apiStatus.className = 'status-dot';
-            elements.statusText.textContent = 'Checking internet and API status...';
-            
-            // Simulate internet connection check
-            setTimeout(() => {
-                appState.internetStatus = Math.random() > 0.2; // 80% chance of success for demo
-                updateStatusIndicator(elements.internetStatus, appState.internetStatus);
-                
-                if (!appState.internetStatus) {
-                    elements.statusText.textContent = 'No internet connection. Please check your network.';
-                    return;
-                }
-                
-                // Simulate API check
-                setTimeout(() => {
-                    appState.apiStatus = Math.random() > 0.2; // 80% chance of success for demo
-                    updateStatusIndicator(elements.apiStatus, appState.apiStatus);
-                    
-                    if (appState.apiStatus) {
-                        appState.modelName = 'gemini-pro';
-                        elements.statusText.textContent = `Ready to search using ${appState.modelName} model`;
-                    } else {
-                        elements.statusText.textContent = 'API Error: Unable to connect to service';
-                    }
-                }, 1000);
-            }, 500);
-        }
-
-        function updateStatusIndicator(element, status) {
-            element.classList.add(status ? 'online' : 'offline');
-        }
-
-        // Start search process
-        function startSearch() {
-            const location = elements.locationInput.value.trim();
-            const placeType = getPlaceType();
-            const petType = getPetType();
-
-            // Validate inputs
-            if (!location) {
-                alert('Please enter a location.');
-                return;
-            }
-            if (!placeType) {
-                alert('Please select or enter a place type.');
-                return;
-            }
-            if (!petType) {
-                alert('Please select or enter a pet type.');
-                return;
-            }
-
-            // Clear previous results
-            elements.placesList.innerHTML = '';
-            elements.placeDetails.innerHTML = '';
-            elements.travelTips.innerHTML = '';
-            elements.chatDisplay.innerHTML = '';
-            appState.placeData = [];
-            appState.currentPlaceIndex = -1;
-            appState.chatHistory = [];
-
-            // Show progress bar
-            elements.progressBar.style.display = 'block';
-            elements.statusText.textContent = `Searching for pet-friendly ${placeType}s in ${location}...`;
-
-            // Simulate search with timeout (in a real app, this would be an API call)
-            setTimeout(() => {
-                performSearch(location, placeType, petType);
-            }, 1500);
-        }
-
-        function getPlaceType() {
-            return elements.placeTypeSelect.value === 'Other' 
-                ? elements.customPlaceInput.value.trim() 
-                : elements.placeTypeSelect.value.trim();
-        }
-
-        function getPetType() {
-            return elements.petTypeSelect.value === 'Other' 
-                ? elements.customPetInput.value.trim() 
-                : elements.petTypeSelect.value.trim();
-        }
-
-        // Perform the search (simulated with generated data)
-        function performSearch(location, placeType, petType) {
+        // Function to call Gemini API with safety settings
+        async function callGeminiAPI(prompt) {
             try {
-                if (!appState.internetStatus || !appState.apiStatus) {
-                    alert('No internet connection or API access. Please check your network.');
-                    return;
+                console.log('Calling Gemini 1.5 Pro API...');
+                
+                if (!GEMINI_API_KEY) {
+                    throw new Error('Please configure a valid Gemini API key');
                 }
 
-                // Generate random places and tips (in a real app, this would come from an API)
-                const { places, tips } = generateRandomPlaces(location, placeType, petType);
+                const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: prompt
+                            }]
+                        }],
+                        safetySettings: [
+                            {
+                                category: "HARM_CATEGORY_HARASSMENT",
+                                threshold: "BLOCK_NONE"
+                            },
+                            {
+                                category: "HARM_CATEGORY_HATE_SPEECH",
+                                threshold: "BLOCK_NONE"
+                            },
+                            {
+                                category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                                threshold: "BLOCK_NONE"
+                            },
+                            {
+                                category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+                                threshold: "BLOCK_NONE"
+                            }
+                        ],
+                        generationConfig: {
+                            temperature: 0.7,
+                            topK: 40,
+                            topP: 0.95,
+                            maxOutputTokens: 1024
+                        }
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.text();
+                    console.error('Gemini API Error Response:', errorData);
+                    throw new Error(`Gemini API failed with status: ${response.status}. ${errorData}`);
+                }
+
+                const data = await response.json();
+                console.log('Gemini API Response:', data);
                 
-                // Update UI with results
-                updateResults(places, tips);
-                
+                if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+                    throw new Error('Invalid response format from Gemini API');
+                }
+
+                return data.candidates[0].content.parts[0].text;
             } catch (error) {
-                alert(`Search failed: ${error.message}`);
-                elements.statusText.textContent = `Search failed: ${error.message}`;
-            } finally {
-                elements.progressBar.style.display = 'none';
+                console.error('Error calling Gemini API:', error.message);
+                showError(`API Error: ${error.message}. Using fallback data.`);
+                return null;
             }
         }
 
-        // Update the UI with search results
-        function updateResults(places, tips) {
-            appState.placeData = places;
-
-            // Update places list
-            if (places.length > 0) {
-                places.forEach((place, index) => {
-                    const placeElement = document.createElement('div');
-                    placeElement.className = 'place-item';
-                    placeElement.textContent = `${index + 1}. ${place.name}`;
-                    placeElement.addEventListener('click', () => displayPlaceDetails(index));
-                    elements.placesList.appendChild(placeElement);
-                });
-
-                // Select first place
-                elements.placesList.firstChild.classList.add('selected');
-                displayPlaceDetails(0);
-                elements.statusText.textContent = `Found ${places.length} pet-friendly places.`;
-            } else {
-                elements.placeDetails.innerHTML = 'No places found. Try adjusting your search criteria.';
-                elements.statusText.textContent = 'No places found.';
-            }
-
-            // Update travel tips
-            if (tips) {
-                // Format the tips with better styling
-                const tipLines = tips.split('\n');
-                let html = '';
-                
-                tipLines.forEach(line => {
-                    if (line.startsWith('Travel Tips:')) {
-                        html += `<h3>${line}</h3>`;
-                    } else if (line.trim().endsWith(':')) {
-                        html += `<h4>${line}</h4>`;
-                    } else if (line.trim().startsWith('•') || line.trim().startsWith('-') || line.trim().startsWith('*')) {
-                        html += `<p>→ ${line.substring(1).trim()}</p>`;
-                    } else if (line.toLowerCase().includes('important') || line.toLowerCase().includes('warning') || line.toLowerCase().includes('note')) {
-                        html += `<p class="important">${line}</p>`;
-                    } else if (line.trim()) {
-                        html += `<p>${line}</p>`;
-                    } else {
-                        html += '<br>';
-                    }
-                });
-
-                elements.travelTips.innerHTML = html;
-            }
-        }
-
-        // Display place details
-        function displayPlaceDetails(index) {
-            appState.currentPlaceIndex = index;
-            const place = appState.placeData[index];
-            
-            // Clear previous selection
-            document.querySelectorAll('.place-item').forEach(item => {
-                item.classList.remove('selected');
-            });
-            
-            // Set new selection
-            elements.placesList.children[index].classList.add('selected');
-            
-            // Clean the details text before displaying
-            let details = place.details;
-            details = details.replace(/\*\*([^*]+)\*\*/g, '$1'); // Remove bold
-            details = details.replace(/\*([^*]+)\*/g, '$1'); // Remove italics
-            details = details.replace(/`([^`]+)`/g, '$1'); // Remove code
-
-            // Split the details into sections
-            const sections = details.split('\n\n');
-            let html = '';
-
-            for (const section of sections) {
-                if (!section.trim()) continue;
-
-                // Check for common section headers
-                if (section.toLowerCase().startsWith('name:')) {
-                    const name = section.replace('Name:', '').trim();
-                    html += `<h3 class="text-title">${name}</h3>`;
-                    html += `<div class="text-title">${'─'.repeat(name.length)}</div><br>`;
-                } 
-                else if (section.toLowerCase().startsWith('address:')) {
-                    html += `<h4 class="text-section">📍 Address</h4>`;
-                    html += `<p class="text-address">${section.replace('Address:', '').trim()}</p><br>`;
-                } 
-                else if (section.toLowerCase().startsWith('rating:')) {
-                    html += `<h4 class="text-section">⭐ Rating</h4>`;
-                    let ratingText = section.replace('Rating:', '').trim();
-                    if (!/\d/.test(ratingText)) {
-                        ratingText = `${(Math.random() * 1.5 + 3.5).toFixed(1)}/5 (estimated)`;
-                    }
-                    html += `<p class="text-rating">${ratingText}</p><br>`;
-                } 
-                else if (section.toLowerCase().startsWith('description:')) {
-                    html += `<h4 class="text-section">📝 Description</h4>`;
-                    html += `<p class="text-description">${section.replace('Description:', '').trim()}</p><br>`;
-                } 
-                else if (section.toLowerCase().includes('feature') || section.toLowerCase().includes('amenit')) {
-                    html += `<h4 class="text-section">✅ Pet-Friendly Features</h4>`;
-                    html += formatList(section);
-                } 
-                else if (section.toLowerCase().includes('policy') || section.toLowerCase().includes('restriction')) {
-                    html += `<h4 class="text-section">⚠️ Policies & Restrictions</h4>`;
-                    html += formatList(section);
-                } 
-                else if (section.toLowerCase().includes('hour') || section.toLowerCase().includes('open')) {
-                    html += `<h4 class="text-section">🕒 Hours</h4>`;
-                    let hoursText = section.replace('Hours:', '').trim();
-                    if (!hoursText || hoursText.length < 5) {
-                        hoursText = generateRandomHours();
-                    }
-                    html += `<p class="text-hours">${hoursText.replace(/\n/g, '<br>')}</p><br>`;
-                } 
-                else if (section.toLowerCase().includes('tip') || section.toLowerCase().includes('advice')) {
-                    html += `<h4 class="text-section">💡 Tips for Visiting</h4>`;
-                    html += formatList(section);
-                } 
-                else {
-                    html += `<p class="text-description">${section}</p><br>`;
-                }
-            }
-
-            elements.placeDetails.innerHTML = html;
-        }
-
-        // Helper function to format lists
-        function formatList(text) {
-            const lines = text.split('\n');
-            let html = '';
-            for (const line of lines) {
-                if (line.trim().startsWith('•') || line.trim().startsWith('-') || line.trim().startsWith('*')) {
-                    html += `<p>• ${line.substring(1).trim()}</p>`;
-                } else if (line.trim()) {
-                    html += `<p>${line}</p>`;
-                }
-            }
-            return html + '<br>';
-        }
-
-        // Generate random opening hours
-        function generateRandomHours() {
-            const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-            let hours = [];
-            for (const day of days) {
-                if (Math.random() > 0.2) { // 80% chance of being open
-                    let openHour = Math.floor(Math.random() * 4) + 7; // 7-10
-                    let closeHour = Math.floor(Math.random() * 6) + 17; // 17-22
-                    if (day === "Saturday" || day === "Sunday") {
-                        openHour = Math.floor(Math.random() * 4) + 8; // 8-11
-                    }
-                    const openTime = `${openHour}:${Math.random() > 0.5 ? '00' : '30'}`;
-                    const closeTime = `${closeHour}:${Math.random() > 0.5 ? '00' : '30'}`;
-                    hours.push(`${day}: ${openTime} - ${closeTime}`);
-                } else {
-                    hours.push(`${day}: Closed`);
-                }
-            }
-            return hours.join('\n');
-        }
-
-        // Generate random pet-friendly places
-        function generateRandomPlaces(location, placeType, petType) {
-            const petAdjectives = {
-                "Dog": ["dog-friendly", "puppy-approved", "canine-welcoming"],
-                "Cat": ["cat-friendly", "feline-approved", "kitty-welcoming"],
-                "Bird": ["bird-friendly", "avian-approved", "feathered-welcoming"],
-                "Rabbit": ["rabbit-friendly", "bunny-approved", "hoppy-welcoming"],
-                "Reptile": ["reptile-friendly", "scaly-approved", "cold-blooded-welcoming"],
-                "Other": ["pet-friendly", "animal-approved", "creature-welcoming"]
-            };
-
-            const adjectives = petAdjectives[petType] || petAdjectives["Other"];
-            const features = [
-                "Water bowls provided", "Pet treats available", "Designated pet areas",
-                "Pet waste stations", "Outdoor seating available", "Pet-friendly staff",
-                "Nearby walking trails", "Pet first-aid kit available"
-            ];
-            const policies = [
-                "Must be leashed at all times", "Current vaccinations required",
-                "Maximum 2 pets per guest", "Pets must be supervised",
-                "No aggressive breeds allowed", "Pet fee may apply"
-            ];
-            const additionalInfo = [
-                `Pet capacity: ${Math.floor(Math.random() * 16) + 5} pets at a time`,
-                `Staff trained in pet first aid: ${Math.random() > 0.3 ? 'Yes' : 'No'}`,
-                `Emergency vet contact: ${Math.random() > 0.4 ? 'Provided' : 'Not provided'}`,
-                `Outdoor seating: ${Math.random() > 0.2 ? 'Available' : 'Limited'}`,
-                `Pet events: ${['Weekly', 'Monthly', 'Seasonal', 'None'][Math.floor(Math.random() * 4)]}`
-            ];
-
-            const places = [];
-            for (let i = 1; i <= 5; i++) {
-                const name = `${adjectives[Math.floor(Math.random() * adjectives.length)].toUpperCase()} ${placeType} #${i}`;
-                const rating = (Math.random() * 1.5 + 3.5).toFixed(1);
-                const streets = ['Main', 'Oak', 'Pine', 'Maple'];
-                const address = `${Math.floor(Math.random() * 900) + 100} ${streets[Math.floor(Math.random() * streets.length)]} St, ${location}`;
-                const hours = generateRandomHours();
-
-                // Select random features and policies
-                const selectedFeatures = [];
-                const featureCount = Math.floor(Math.random() * 3) + 3;
-                while (selectedFeatures.length < featureCount) {
-                    const randomFeature = features[Math.floor(Math.random() * features.length)];
-                    if (!selectedFeatures.includes(randomFeature)) {
-                        selectedFeatures.push(randomFeature);
-                    }
-                }
-
-                const selectedPolicies = [];
-                const policyCount = Math.floor(Math.random() * 2) + 2;
-                while (selectedPolicies.length < policyCount) {
-                    const randomPolicy = policies[Math.floor(Math.random() * policies.length)];
-                    if (!selectedPolicies.includes(randomPolicy)) {
-                        selectedPolicies.push(randomPolicy);
-                    }
-                }
-
-                const selectedAdditional = [];
-                const additionalCount = Math.floor(Math.random() * 3) + 2;
-                while (selectedAdditional.length < additionalCount) {
-                    const randomAdditional = additionalInfo[Math.floor(Math.random() * additionalInfo.length)];
-                    if (!selectedAdditional.includes(randomAdditional)) {
-                        selectedAdditional.push(randomAdditional);
-                    }
-                }
-
-                // Create bullet point lists
-                const featureBullets = selectedFeatures.map(f => `• ${f}`).join('\n');
-                const policyBullets = selectedPolicies.map(p => `• ${p}`).join('\n');
-                const additionalBullets = selectedAdditional.map(a => `• ${a}`).join('\n');
-
-                // Build details
-                const details = `
-Name: ${name}
-Address: ${address}
-Rating: ${rating}/5
-
-Description:
-This ${placeType.toLowerCase()} in ${location} is known for being exceptionally welcoming to ${petType.toLowerCase()}s. 
-It offers a comfortable environment for both humans and pets.
-
-Pet-Friendly Features:
-${featureBullets}
-
-Policies:
-${policyBullets}
-
-Additional Information:
-${additionalBullets}
-
-Hours:
-${hours}
-
-Tips for Visiting:
-• Visit during off-peak hours for a more relaxed experience
-• Bring your pet's favorite toys or bedding
-• Ask staff about any current pet promotions
-• Check the weather if utilizing outdoor areas
-`.trim();
-
-                places.push({
-                    name: name,
-                    details: details
-                });
-            }
-
-            // Generate travel tips
-            const tips = `
-Travel Tips for ${petType} Owners in ${location}:
-
-1. Always carry a copy of your pet's vaccination records
-2. Pack extra water and snacks for your pet
-3. Research local veterinary clinics before your trip
-4. Check the weather forecast for pet-friendly activities
-5. Bring familiar toys or bedding to help your pet feel comfortable
-6. Have your pet microchipped or wear ID tags with contact info
-7. Take frequent breaks during travel for your pet's comfort
-8. Keep a pet first-aid kit handy
-
-General Advice:
-• Always call ahead to confirm pet policies
-• Be mindful of other guests and clean up after your pet
-• Consider your pet's temperament when planning activities
-• Have a backup plan in case your pet becomes stressed
-`.trim();
-
-            return { places, tips };
-        }
-
-        // Send chat message
-        function sendChatMessage() {
-            if (appState.currentPlaceIndex === -1 || appState.placeData.length === 0) {
-                alert('Please select a place first.');
-                return;
-            }
-
-            const message = elements.chatInput.value.trim();
-            if (!message) {
-                alert('Please enter a message.');
-                return;
-            }
-
-            const place = appState.placeData[appState.currentPlaceIndex];
-            const placeName = place.name;
-
-            // Add user message to chat
-            addToChat(`You: ${message}`, 'user');
-
+        // Fetch countries from REST Countries API
+        async function fetchCountries() {
             try {
-                // Disable input while "thinking"
-                elements.chatInput.value = '';
-                elements.chatInput.disabled = true;
-                elements.sendBtn.disabled = true;
-                addToChat('Gemini is thinking...', 'system');
+                console.log('Fetching countries from REST Countries API...');
+                const response = await fetch('https://restcountries.com/v3.1/all');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch countries');
+                }
+                const data = await response.json();
+                console.log('Countries API Response:', data);
+                
+                // Sort countries alphabetically by name
+                data.sort((a, b) => a.name.common.localeCompare(b.name.common));
+                
+                // Store the data globally for later use
+                window.countriesData = data;
+                
+                // Populate the dropdown
+                const countrySelect = document.getElementById('country');
+                if (!countrySelect) {
+                    console.error('Country select element not found');
+                    return;
+                }
+                
+                // Clear existing options
+                countrySelect.innerHTML = '<option value="">Select a country</option>';
+                
+                // Add countries to dropdown
+                data.forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.name.common;
+                    option.textContent = country.name.common;
+                    countrySelect.appendChild(option);
+                });
+                
+                console.log('Countries loaded successfully');
+            } catch (error) {
+                console.error('Error fetching countries:', error);
+                showError('Failed to load countries. Please refresh the page.');
+            }
+        }
 
-                // In a real app, this would be an API call to Gemini
-                setTimeout(() => {
-                    // Remove the "thinking" message
-                    const chatLines = elements.chatDisplay.children;
-                    if (chatLines.length > 0) {
-                        elements.chatDisplay.removeChild(chatLines[chatLines.length - 1]);
+        // Get vaccine recommendations based on country data
+        async function getVaccineRecommendations(countryName) {
+            showLoader();
+            
+            try {
+                // Find the country data from our stored data
+                const countryData = window.countriesData.find(c => c.name.common === countryName);
+                
+                if (!countryData) {
+                    throw new Error('Country data not found');
+                }
+
+                console.log('Selected Country Data:', countryData);
+
+                // Generate vaccine recommendations using Gemini API
+                const vaccinePrompt = `You are a medical expert providing vaccine recommendations for travelers. 
+                Generate a specific list of recommended vaccines for travelers visiting ${countryData.name.common}. 
+                
+                Country Information:
+                - Region: ${countryData.region}${countryData.subregion ? ` (${countryData.subregion})` : ''}
+                - Population: ${countryData.population}
+                - Languages: ${Object.values(countryData.languages || {}).join(', ')}
+                - Capital: ${countryData.capital?.[0] || 'N/A'}
+                
+                Consider:
+                1. Regional disease risks
+                2. Local health conditions
+                3. Population density
+                4. Healthcare infrastructure
+                5. Recent disease outbreaks
+                
+                Return ONLY a JSON array of vaccine objects in this exact format:
+                [
+                    {
+                        "name": "vaccine name",
+                        "description": "specific reason for this vaccine in this country",
+                        "requirement": "Required",
+                        "riskLevel": "High"
                     }
+                ]
+                
+                Include 4-6 most important vaccines. Make descriptions specific to the country.`;
 
-                    // Generate a simulated response
-                    const responses = [
-                        `${placeName} is very welcoming to pets! They have several pet-friendly amenities including water bowls and designated pet areas.`,
-                        `Based on the information, ${placeName} requires pets to be leashed at all times and has a maximum of 2 pets per guest.`,
-                        `I recommend calling ${placeName} ahead of your visit to confirm their current pet policies as they may change seasonally.`,
-                        `Visitors to ${placeName} with pets often recommend bringing your pet's favorite blanket to help them feel more comfortable in the new environment.`,
-                        `${placeName} has received positive feedback from pet owners, with many noting the staff's friendliness toward animals.`
+                const vaccineResponse = await callGeminiAPI(vaccinePrompt);
+                console.log('Raw Vaccine Response from Gemini:', vaccineResponse);
+                let vaccines = [];
+
+                if (vaccineResponse) {
+                    try {
+                        // Clean the response to extract only the JSON array
+                        const cleanedResponse = vaccineResponse
+                            .replace(/```json/g, '')
+                            .replace(/```/g, '')
+                            .trim();
+                        
+                        console.log('Cleaned Vaccine Response:', cleanedResponse);
+                        
+                        // Try to parse the JSON
+                        const parsedVaccines = JSON.parse(cleanedResponse);
+                        console.log('Parsed Vaccine Data:', parsedVaccines);
+                        
+                        // Validate the structure
+                        if (Array.isArray(parsedVaccines) && parsedVaccines.length > 0) {
+                            vaccines = parsedVaccines.map(vaccine => ({
+                                name: vaccine.name || 'Unknown Vaccine',
+                                description: vaccine.description || 'No description available',
+                                requirement: vaccine.requirement || 'Recommended',
+                                riskLevel: vaccine.riskLevel || 'Medium'
+                            }));
+                        }
+                    } catch (error) {
+                        console.error('Error parsing vaccine data:', error);
+                    }
+                }
+
+                // Fallback to region-specific recommendations if Gemini API fails
+                if (vaccines.length === 0) {
+                    console.log('Using fallback vaccine recommendations');
+                    // Basic vaccines for all countries
+                    vaccines = [
+                        {
+                            name: "MMR",
+                            description: "Protects against measles, mumps, and rubella. Essential for international travel.",
+                            requirement: "Routine",
+                            riskLevel: "Low"
+                        },
+                        {
+                            name: "Tdap",
+                            description: "Protects against tetanus, diphtheria, and pertussis. Recommended for all travelers.",
+                            requirement: "Routine",
+                            riskLevel: "Low"
+                        }
                     ];
 
-                    const answer = responses[Math.floor(Math.random() * responses.length)];
-                    addToChat(`Gemini: ${answer}`, 'assistant');
+                    // Region-specific vaccines
+                    if (countryData.region === "Africa" || countryData.subregion?.includes("Africa")) {
+                        vaccines.push(
+                            {
+                                name: "Yellow Fever",
+                                description: `Required for entry to ${countryData.name.common}. High risk in this region.`,
+                                requirement: "Required",
+                                riskLevel: "High"
+                            },
+                            {
+                                name: "Hepatitis A",
+                                description: "High risk of food and water-borne transmission in this region.",
+                                requirement: "Recommended",
+                                riskLevel: "High"
+                            },
+                            {
+                                name: "Typhoid",
+                                description: "Common in areas with limited access to clean water and food safety concerns.",
+                                requirement: "Recommended",
+                                riskLevel: "High"
+                            }
+                        );
+                    } else if (countryData.region === "Asia" || countryData.subregion?.includes("Asia")) {
+                        vaccines.push(
+                            {
+                                name: "Hepatitis A",
+                                description: "Prevalent in many Asian countries. High risk of transmission.",
+                                requirement: "Recommended",
+                                riskLevel: "High"
+                            },
+                            {
+                                name: "Typhoid",
+                                description: "Common in areas with varying food safety standards.",
+                                requirement: "Recommended",
+                                riskLevel: "High"
+                            },
+                            {
+                                name: "Japanese Encephalitis",
+                                description: "Risk in rural areas, especially during monsoon season.",
+                                requirement: "Recommended",
+                                riskLevel: "Medium"
+                            }
+                        );
+                    } else if (countryData.region === "Americas" || countryData.subregion?.includes("America")) {
+                        vaccines.push(
+                            {
+                                name: "Hepatitis A",
+                                description: "Varying risk levels across different regions of the Americas.",
+                                requirement: "Recommended",
+                                riskLevel: "Medium"
+                            },
+                            {
+                                name: "Typhoid",
+                                description: "Risk varies by region and local sanitation conditions.",
+                                requirement: "Recommended",
+                                riskLevel: "Medium"
+                            }
+                        );
+                    }
 
-                    // Re-enable input
-                    elements.chatInput.disabled = false;
-                    elements.sendBtn.disabled = false;
-                    elements.chatInput.focus();
-                }, 1500);
+                    // Add population density based recommendations
+                    if (countryData.population > 100000000) {
+                        vaccines.push(
+                            {
+                                name: "COVID-19",
+                                description: "High population density increases transmission risk.",
+                                requirement: "Recommended",
+                                riskLevel: "High"
+                            },
+                            {
+                                name: "Influenza",
+                                description: "Seasonal flu risk increased in densely populated areas.",
+                                requirement: "Recommended",
+                                riskLevel: "Medium"
+                            }
+                        );
+                    }
+                }
 
+                // Generate health information using Gemini API
+                const healthPrompt = `Generate comprehensive health information for travelers visiting ${countryData.name.common}.
+                Consider the following information:
+                - Region: ${countryData.region}${countryData.subregion ? ` (${countryData.subregion})` : ''}
+                - Population: ${countryData.population}
+                - Languages: ${Object.values(countryData.languages || {}).join(', ')}
+                - Capital: ${countryData.capital?.[0] || 'N/A'}
+                - Currencies: ${Object.values(countryData.currencies || {}).map(curr => `${curr.name} (${curr.symbol || 'N/A'})`).join(', ')}
+                
+                Include information about:
+                1. Disease risks and health concerns
+                2. Medical facilities and healthcare access
+                3. Water and food safety
+                4. Local conditions and environmental factors
+                5. Cultural considerations related to health
+                
+                Format the response in HTML with appropriate paragraphs and lists.`;
+
+                let healthInfo = await callGeminiAPI(healthPrompt);
+                console.log('Health Info Response from Gemini:', healthInfo);
+
+                // Fallback to basic health info if Gemini API fails
+                if (!healthInfo) {
+                    console.log('Using fallback health information');
+                    healthInfo = generateHealthInfo(countryData);
+                }
+                
+                displayResults(countryData, vaccines, healthInfo);
             } catch (error) {
-                addToChat(`Error: ${error.message}`, 'error');
-                elements.chatInput.disabled = false;
-                elements.sendBtn.disabled = false;
+                console.error('Error:', error);
+                showError('Failed to fetch recommendations. Please try again later.');
+            } finally {
+                hideLoader();
             }
         }
 
-        // Add message to chat display
-        function addToChat(message, sender) {
-            const messageElement = document.createElement('div');
-            messageElement.className = `chat-message ${sender}`;
-            messageElement.textContent = message;
-            elements.chatDisplay.appendChild(messageElement);
-            elements.chatDisplay.scrollTop = elements.chatDisplay.scrollHeight;
+        // Generate health information based on country data
+        function generateHealthInfo(countryData) {
+            const info = [];
+            
+            // Basic health information
+            info.push(`<p><strong>Region:</strong> ${countryData.region}${countryData.subregion ? ` (${countryData.subregion})` : ''}</p>`);
+            
+            // Population density consideration
+            if (countryData.population > 100000000) {
+                info.push(`<p><strong>Population Density:</strong> High population density may increase disease transmission risk.</p>`);
+            }
+            
+            // Language information
+            if (countryData.languages) {
+                const languages = Object.values(countryData.languages).join(', ');
+                info.push(`<p><strong>Languages:</strong> ${languages}</p>`);
+            }
+            
+            // Currency information
+            if (countryData.currencies) {
+                const currencies = Object.values(countryData.currencies)
+                    .map(curr => `${curr.name} (${curr.symbol || 'N/A'})`)
+                    .join(', ');
+                info.push(`<p><strong>Local Currency:</strong> ${currencies}</p>`);
+            }
+            
+            // Capital information
+            if (countryData.capital && countryData.capital.length > 0) {
+                info.push(`<p><strong>Capital:</strong> ${countryData.capital[0]}</p>`);
+            }
+            
+            // Region-specific health advice
+            if (countryData.region === "Africa" || countryData.subregion?.includes("Africa")) {
+                info.push(`
+                    <p><strong>Health Considerations:</strong></p>
+                    <ul>
+                        <li>High risk of malaria in many regions</li>
+                        <li>Food and water safety concerns</li>
+                        <li>Limited healthcare access in rural areas</li>
+                        <li>Yellow fever vaccination may be required</li>
+                    </ul>
+                `);
+            } else if (countryData.region === "Asia" || countryData.subregion?.includes("Asia")) {
+                info.push(`
+                    <p><strong>Health Considerations:</strong></p>
+                    <ul>
+                        <li>Food and water safety varies by region</li>
+                        <li>Air pollution in major cities</li>
+                        <li>Healthcare quality varies significantly</li>
+                        <li>High risk of food-borne illnesses</li>
+                    </ul>
+                `);
+            } else if (countryData.region === "Americas" || countryData.subregion?.includes("America")) {
+                info.push(`
+                    <p><strong>Health Considerations:</strong></p>
+                    <ul>
+                        <li>Healthcare access varies by region</li>
+                        <li>Altitude sickness in mountainous areas</li>
+                        <li>Food safety varies by region</li>
+                        <li>Mosquito-borne diseases in tropical areas</li>
+                    </ul>
+                `);
+            }
+            
+            return info.join('');
         }
 
+        // Display results
+        function displayResults(countryData, vaccineData, healthData) {
+            // Update country info with proper flag URL
+            countryInfo.innerHTML = `
+                <img class="country-flag" src="${countryData.flags.png}" 
+                     alt="${countryData.name.common} flag" 
+                     onerror="this.onerror=null; this.src='https://flagcdn.com/w160/${countryData.cca2.toLowerCase()}.png';">
+                <div>
+                    <h2>${countryData.name.common}</h2>
+                    <p>Region: ${countryData.region}${countryData.subregion ? ` (${countryData.subregion})` : ''}</p>
+                </div>
+            `;
+            
+            // Clear previous vaccine list
+            vaccineList.innerHTML = '';
+            
+            // Sort vaccines: required first, then by risk level
+            vaccineData.sort((a, b) => {
+                const reqPriority = { required: 0, recommended: 1, routine: 2 };
+                const reqDiff = (reqPriority[a.requirement.toLowerCase()] || 3) - (reqPriority[b.requirement.toLowerCase()] || 3);
+                if (reqDiff !== 0) return reqDiff;
+                
+                const riskPriority = { high: 0, medium: 1, low: 2 };
+                return (riskPriority[a.riskLevel.toLowerCase()] || 3) - (riskPriority[b.riskLevel.toLowerCase()] || 3);
+            });
+            
+            // Populate vaccine list
+            vaccineData.forEach(vaccine => {
+                const riskClass = vaccine.riskLevel.toLowerCase() === 'high' ? 'risk-high' : 
+                                 vaccine.riskLevel.toLowerCase() === 'medium' ? 'risk-medium' : '';
+                
+                const reqLabel = vaccine.requirement.toLowerCase() === 'required' ? 
+                                '<span style="color: #ea4335; font-weight: 600;">REQUIRED</span>' : 
+                                (vaccine.requirement.toLowerCase() === 'recommended' ? 
+                                '<span style="color: #fbbc05; font-weight: 600;">RECOMMENDED</span>' : 
+                                '<span style="color: #34a853; font-weight: 600;">ROUTINE</span>');
+                
+                const li = document.createElement('li');
+                li.className = `vaccine-item ${riskClass}`;
+                li.innerHTML = `
+                    <div class="vaccine-name">
+                        <span class="vaccine-icon">💉</span> ${vaccine.name}
+                    </div>
+                    <div class="vaccine-info">${vaccine.description}</div>
+                    <div>
+                        <strong>Status:</strong> ${reqLabel} | 
+                        <strong>Risk Level:</strong> ${vaccine.riskLevel}
+                    </div>
+                `;
+                
+                vaccineList.appendChild(li);
+            });
+            
+            // Update health info
+            healthInfo.innerHTML = healthData;
+            
+            // Show results
+            resultsContainer.style.display = 'block';
+            
+            // Reset to first tab
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            document.querySelector('.tab[data-tab="vaccines"]').classList.add('active');
+            document.getElementById('vaccinesTab').classList.add('active');
+            
+            // Scroll to results
+            resultsContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Show loader
+        function showLoader() {
+            loader.style.display = 'block';
+            resultsContainer.style.display = 'none';
+            errorMessage.style.display = 'none';
+        }
+        
+        // Hide loader
+        function hideLoader() {
+            loader.style.display = 'none';
+        }
+        
+        // Show error message
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            if (errorMessage) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                // Auto-hide error after 5 seconds
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 5000);
+            }
+            console.error(message);
+        }
+        
+        // Tab functionality
+        function setupTabs() {
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    tab.classList.add('active');
+                    document.getElementById(`${tab.dataset.tab}Tab`).classList.add('active');
+                });
+            });
+        }
+        
         // Initialize the application
-        init();
+        function init() {
+            // Fetch countries when the page loads
+            fetchCountries();
+            
+            // Add form submission handler
+            const searchForm = document.getElementById('searchForm');
+            if (searchForm) {
+                searchForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const countrySelect = document.getElementById('country');
+                    if (!countrySelect) {
+                        console.error('Country select element not found');
+                        return;
+                    }
+                    
+                    const selectedCountry = countrySelect.value;
+                    if (!selectedCountry) {
+                        showError('Please select a country');
+                        return;
+                    }
+                    
+                    // Get vaccine recommendations for the selected country
+                    await getVaccineRecommendations(selectedCountry);
+                });
+            }
+            
+            // Setup tabs
+            setupTabs();
+        }
+
+        // Call init when the document is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
     </script>
 </body>
 </html>
