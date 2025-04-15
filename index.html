@@ -223,7 +223,16 @@
             cursor: pointer;
         }
 
-        select:focus {
+        input[type="number"] {
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            background-color: white;
+            font-size: 1rem;
+            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        select:focus, input[type="number"]:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
@@ -794,6 +803,11 @@
                 width: 100%;
                 text-align: center;
             }
+
+            .medical-conditions-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
         }
 
         /* Tablet Optimizations */
@@ -964,7 +978,7 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
         }
 
         .welcome-content {
@@ -1234,24 +1248,740 @@
             font-size: 2rem;
             color: white;
             opacity: 0;
-            animation: fadeInOut 3s ease-in-out forwards;
-            animation-delay: 1.5s;
+            animation: quickFadeInOut 0.5s ease-in-out forwards;
             z-index: 1001;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        @keyframes fadeInOut {
-            0% {
+        @keyframes quickFadeInOut {
+            0% { opacity: 0; transform: translate(-50%, -40%); }
+            50% { opacity: 1; transform: translate(-50%, -50%); }
+            100% { opacity: 0; transform: translate(-50%, -60%); }
+        }
+
+        .medical-conditions-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            background: var(--light-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .condition-category {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .condition-category h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 0.5rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .checkbox-label:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .checkbox-label input {
+            margin-right: 0.5rem;
+            cursor: pointer;
+        }
+
+        .personal-tips {
+            margin-top: 1rem;
+        }
+
+        .personal-tip-item {
+            background: var(--light-gradient);
+            margin-bottom: 1.25rem;
+            padding: 1.25rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .personal-tip-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .personal-tip-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .personal-tip-icon {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .medication-info {
+            margin-top: 1rem;
+        }
+
+        .medication-category {
+            margin-bottom: 2rem;
+        }
+
+        .medication-category-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-bg);
+        }
+
+        .medication-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .medication-item {
+            background: var(--light-gradient);
+            padding: 1.25rem;
+            border-radius: 10px;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .medication-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .medication-name {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .medication-icon {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .medication-description {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .medication-dosage {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .medication-note {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .medication-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* New Modern Loader Animation */
+        .modern-loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem auto;
+            text-align: center;
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background: transparent;
+            border-radius: 20px;
+            overflow: hidden;
+            flex-direction: column;
+        }
+        
+        .globe-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin-bottom: 20px;
+        }
+        
+        .globe {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            border-radius: 50%;
+            top: 15px;
+            left: 15px;
+            overflow: hidden;
+            box-shadow: 
+                inset 0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 15px rgba(79, 172, 254, 0.6);
+            animation: globePulse 3s ease-in-out infinite;
+        }
+        
+        .globe::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6bm9uZTtzdHJva2U6cmdiYSgyNTUsMjU1LDI1NSwwLjMpO3N0cm9rZS1taXRlcmxpbWl0OjEwO3N0cm9rZS13aWR0aDowLjc1cHg7fTwvc3R5bGU+PC9kZWZzPjxjaXJjbGUgY2xhc3M9ImNscy0xIiBjeD0iMTAwIiBjeT0iMTAwIiByPSI5OSIvPjxjaXJjbGUgY2xhc3M9ImNscy0xIiBjeD0iMTAwIiBjeT0iMTAwIiByPSI2NiIvPjxjaXJjbGUgY2xhc3M9ImNscy0xIiBjeD0iMTAwIiBjeT0iMTAwIiByPSIzMyIvPjxsaW5lIGNsYXNzPSJjbHMtMSIgeDE9IjEiIHkxPSIxMDAiIHgyPSIxOTkiIHkyPSIxMDAiLz48bGluZSBjbGFzcz0iY2xzLTEiIHgxPSIxMDAiIHkxPSIxIiB4Mj0iMTAwIiB5Mj0iMTk5Ii8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTAwLDFhMTgzLjQ4LDE4My40OCwwLDAsMSwwLDE5OCIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEwMCwxYTE4My40OCwxODMuNDgsMCwwLDAsMCwxOTgiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zNCw1MGExNTYuMTYsMTU2LjE2LDAsMCwwLDAsMTAwIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTY2LDUwYTE1Ni4xNiwxNTYuMTYsMCwwLDAsMCwxMDAiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xLDUwQTE1Ni4xNiwxNTYuMTYsMCwwLDEsMTk5LDUwIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMSwxNTBBMTU2LjE2LDE1Ni4xNiwwLDAsMSwxOTksMTUwIi8+PC9zdmc+');
+            background-size: 75% 75%;
+            background-position: center;
+            background-repeat: no-repeat;
+            animation: globeRotate 20s linear infinite;
+            opacity: 0.7;
+        }
+        
+        .globe::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 80%);
+            border-radius: 50%;
+        }
+        
+        .plane {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: transparent;
+            color: #fff;
+            font-size: 25px;
+            top: 75px;
+            left: 75px;
+            z-index: 10;
+            animation: planeOrbit 8s linear infinite;
+            transform-origin: center;
+        }
+        
+        .vaccine-icon {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            color: #fff;
+            font-size: 25px;
+            top: 35px;
+            left: 75px;
+            z-index: 10;
+            animation: vaccineOrbit 12s linear infinite reverse;
+            transform-origin: center;
+        }
+        
+        .health-icon {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            color: #fff;
+            font-size: 25px;
+            top: 75px;
+            left: 35px;
+            z-index: 10;
+            animation: healthOrbit 10s linear infinite;
+            transform-origin: center;
+        }
+        
+        .orbit {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            top: -20px;
+            left: -20px;
+            z-index: 1;
+        }
+        
+        .loading-bar-container {
+            position: relative;
+            width: 200px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .loading-bar {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            border-radius: 10px;
+            animation: loadingProgress 2.5s ease-in-out infinite;
+        }
+        
+        .loading-message {
+            font-size: 1.1rem;
+            color: #4facfe;
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .status-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+        
+        @keyframes globeRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes globePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes planeOrbit {
+            0% { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+        }
+        
+        @keyframes vaccineOrbit {
+            0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+        }
+        
+        @keyframes healthOrbit {
+            0% { transform: rotate(0deg) translateX(75px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(75px) rotate(-360deg); }
+        }
+        
+        @keyframes loadingProgress {
+            0% { width: 0%; }
+            25% { width: 50%; }
+            50% { width: 70%; }
+            75% { width: 85%; }
+            100% { width: 100%; }
+        }
+
+        .status-change {
+            animation: statusChange 10s linear infinite;
+        }
+
+        @keyframes statusChange {
+            0%, 20% { opacity: 1; }
+            25%, 95% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Chat Interface Styles */
+        .chat-container {
+            margin-top: 2rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+            box-shadow: var(--card-shadow);
+        }
+
+        .chat-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .chat-message {
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            max-width: 80%;
+            animation: messageAppear 0.3s ease-out;
+        }
+
+        .user-message {
+            background: var(--primary-gradient);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .bot-message {
+            background: var(--light-bg);
+            color: var(--text-color);
+            align-self: flex-start;
+        }
+
+        .chat-input-container {
+            display: flex;
+            padding: 1rem;
+            gap: 0.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        #chatInput {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        #sendMessage {
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #sendMessage:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes messageAppear {
+            from {
                 opacity: 0;
+                transform: translateY(10px);
             }
-            20% {
+            to {
                 opacity: 1;
+                transform: translateY(0);
             }
-            80% {
-                opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .chat-messages {
+                height: 250px;
             }
-            100% {
-                opacity: 0;
+            
+            .chat-message {
+                max-width: 90%;
             }
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        .medication-loading {
+            text-align: center;
+            padding: 2rem;
+            background: var(--light-bg);
+            border-radius: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .medication-recommendations {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .custom-conditions {
+            padding: 0.5rem 0;
+        }
+
+        .custom-condition-input {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .custom-condition-field {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .add-condition-btn {
+            padding: 0.5rem 1rem;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .custom-conditions-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .custom-condition-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            background: var(--light-gradient);
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .remove-condition {
+            cursor: pointer;
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+
+        .custom-condition-tag:hover {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .condition-description {
+            display: none;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+        }
+
+        .condition-description textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .description-toggle {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            text-decoration: underline;
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+
+        .description-toggle:hover {
+            color: var(--secondary-color);
+        }
+
+        .has-description {
+            border-left: 3px solid var(--primary-color);
+            padding-left: 0.5rem;
+        }
+
+        .condition-summary {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.25rem;
+            font-style: italic;
+        }
+
+        .custom-condition-details {
+            margin-top: 0.5rem;
+        }
+
+        .custom-condition-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .custom-condition-form input,
+        .custom-condition-form textarea {
+            padding: 0.5rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .custom-condition-form textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .condition-tag-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .condition-description-preview {
+            font-size: 0.8rem;
+            color: #666;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Add these risk level color classes */
+        .risk-high {
+            background: linear-gradient(to right, rgba(255, 99, 71, 0.2), rgba(255, 99, 71, 0.1));
+            border-left: 4px solid #ff6347;
+        }
+
+        .risk-medium {
+            background: linear-gradient(to right, rgba(255, 165, 0, 0.2), rgba(255, 165, 0, 0.1));
+            border-left: 4px solid #ffa500;
+        }
+
+        .risk-low {
+            background: linear-gradient(to right, rgba(144, 238, 144, 0.2), rgba(144, 238, 144, 0.1));
+            border-left: 4px solid #90ee90;
+        }
+
+        .risk-level-indicator {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .risk-level-high {
+            background-color: rgba(255, 99, 71, 0.2);
+            color: #d63031;
+        }
+
+        .risk-level-medium {
+            background-color: rgba(255, 165, 0, 0.2);
+            color: #e17055;
+        }
+
+        .risk-level-low {
+            background-color: rgba(144, 238, 144, 0.2);
+            color: #00b894;
+        }
+
+        .vaccine-card {
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .vaccine-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .universal-health-info {
+            background: linear-gradient(to right, rgba(100, 149, 237, 0.1), rgba(100, 149, 237, 0.05));
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid cornflowerblue;
+        }
+
+        .universal-health-info textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 0.8rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            resize: vertical;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .universal-health-info textarea:focus {
+            border-color: cornflowerblue;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(100, 149, 237, 0.2);
+        }
+
+        .universal-health-info h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .health-info-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .health-info-category {
+            background: white;
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .health-info-category h4 {
+            color: #34495e;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .health-info-category ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .health-info-category li {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+
+        .health-info-preview {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 0.8rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+            display: none;
         }
     </style>
 </head>
@@ -1337,30 +2067,163 @@
                     </select>
                 </div>
                 
+                <div class="form-group">
+                    <label for="age">Your Age:</label>
+                    <input type="number" id="age" name="age" min="1" max="120" placeholder="Enter your age">
+                </div>
+
+                <div class="universal-health-info">
+                    <h3>General Health Information</h3>
+                    <p class="text-muted">Provide overall information about your health status, medications, and any relevant medical details.</p>
+                    <textarea id="universalHealthInfo" placeholder="Example: I take daily medications for blood pressure and diabetes. I have mild asthma triggered by humidity. I'm allergic to penicillin. I had knee surgery 2 years ago..."></textarea>
+                    <div class="health-info-categories">
+                        <div class="health-info-category">
+                            <h4>Suggested Information to Include:</h4>
+                            <ul>
+                                <li>• Current medications and dosages</li>
+                                <li>• Known allergies</li>
+                                <li>• Recent surgeries or procedures</li>
+                                <li>• Chronic condition details</li>
+                                <li>• Physical limitations</li>
+                            </ul>
+                        </div>
+                        <div class="health-info-category">
+                            <h4>Medical History Highlights:</h4>
+                            <ul>
+                                <li>• Past major illnesses</li>
+                                <li>• Family health history</li>
+                                <li>• Regular treatments</li>
+                                <li>• Emergency contacts</li>
+                                <li>• Blood type</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="healthInfoPreview" class="health-info-preview"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Medical Conditions (if any):</label>
+                    <div class="medical-conditions-container">
+                        <div class="condition-category">
+                            <h4>Common Conditions</h4>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="diabetes"> Diabetes
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="pregnancy"> Pregnancy
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="heart"> Heart Conditions
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="immune"> Immune Deficiency
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="respiratory"> Respiratory Issues
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="hypertension"> Hypertension
+                            </label>
+                        </div>
+                        <div class="condition-category">
+                            <h4>Chronic Conditions</h4>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="arthritis"> Arthritis
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="asthma"> Asthma
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="cancer"> Cancer
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="epilepsy"> Epilepsy
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="thyroid"> Thyroid Disorders
+                            </label>
+                        </div>
+                        <div class="condition-category">
+                            <h4>Allergies</h4>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="drug_allergies"> Drug Allergies
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="food_allergies"> Food Allergies
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="latex"> Latex Allergy
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="environmental"> Environmental Allergies
+                            </label>
+                        </div>
+                        <div class="condition-category">
+                            <h4>Mental Health</h4>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="anxiety"> Anxiety Disorder
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="depression"> Depression
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="panic"> Panic Disorder
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="ptsd"> PTSD
+                            </label>
+                        </div>
+                        <div class="condition-category">
+                            <h4>Other Conditions</h4>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="blood_disorders"> Blood Disorders
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="autoimmune"> Autoimmune Disorders
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="motion_sickness"> Motion Sickness
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="sleep_disorders"> Sleep Disorders
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="conditions" value="skin_conditions"> Skin Conditions
+                            </label>
+                        </div>
+                        <div class="condition-category">
+                            <h4>Custom Health Conditions</h4>
+                            <div class="custom-conditions">
+                                <div class="custom-condition-input">
+                                    <input type="text" id="newCondition" placeholder="Enter your condition" class="custom-condition-field">
+                                    <button type="button" onclick="addCustomCondition()" class="add-condition-btn">Add</button>
+                                </div>
+                                <div id="customConditionsList" class="custom-conditions-list">
+                                    <!-- Custom conditions will be added here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <button type="submit">Get Recommendations</button>
             </form>
         </div>
         
         <div class="loader" id="loader">
-            <div class="loader-scene">
-                <div class="doctor">👨‍⚕️</div>
-                <div class="patient">🧑</div>
-                <div class="syringe" style="left: 45%; top: 40%;">💉</div>
-                <div class="medicine" style="left: 35%; top: 50%;">💊</div>
-                <div class="medicine" style="left: 55%; top: 45%;">🧪</div>
-                <div class="heart" style="left: 48%; top: 35%;">❤️</div>
-                <div class="sparkle" style="left: 40%; top: 45%;">✨</div>
-                <div class="sparkle" style="left: 60%; top: 40%;">✨</div>
-                <div class="health-items">
-                    <div class="health-item">🦠</div>
-                    <div class="health-item">🧬</div>
-                    <div class="health-item">🔬</div>
-                    <div class="health-item">🏥</div>
+            <div class="modern-loader">
+                <div class="globe-container">
+                    <div class="orbit"></div>
+                    <div class="globe"></div>
+                    <div class="plane">✈️</div>
+                    <div class="vaccine-icon">💉</div>
+                    <div class="health-icon">🩺</div>
                 </div>
-                <div class="loading-stage"></div>
-            </div>
-            <div class="loader-text">
-                Preparing your travel health plan<span class="loading-dots"></span>
+                <div class="loading-message">Preparing Your Travel Health Plan</div>
+                <div class="loading-bar-container">
+                    <div class="loading-bar"></div>
+                </div>
+                <div class="status-text status-change">Analyzing destination health data...</div>
             </div>
         </div>
         
@@ -1375,6 +2238,8 @@
             
             <div class="tabs">
                 <div class="tab active" data-tab="vaccines">Recommended Vaccines</div>
+                <div class="tab" data-tab="personal">Personal Tips</div>
+                <div class="tab" data-tab="medications">Medications</div>
                 <div class="tab" data-tab="health">Health Info</div>
                 <div class="tab" data-tab="tips">Travel Tips</div>
             </div>
@@ -1384,6 +2249,37 @@
                 <ul class="vaccine-list" id="vaccineList">
                     <!-- Will be populated by JavaScript -->
                 </ul>
+            </div>
+            
+            <div class="tab-content" id="personalTab">
+                <h3>Personalized Health Recommendations</h3>
+                <div class="personal-tips" id="personalTips">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+                
+                <!-- Chat Interface -->
+                <div class="chat-container" style="margin-top: 2rem; border: 1px solid #e0e0e0; border-radius: 10px; overflow: hidden; background: white; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+                    <div class="chat-header" style="background: linear-gradient(135deg, #4285f4, #34a853); color: white; padding: 1rem;">
+                        <h4>💬 Chat with TravelHealth Assistant</h4>
+                    </div>
+                    <div id="chatMessages" style="height: 300px; overflow-y: auto; padding: 1rem;"></div>
+                    <div style="display: flex; padding: 1rem; gap: 0.5rem; border-top: 1px solid #e0e0e0;">
+                        <input type="text" id="chatInput" placeholder="Ask about your health concerns..." 
+                               style="flex: 1; padding: 0.8rem; border: 1px solid #e0e0e0; border-radius: 5px;">
+                        <button onclick="sendMessage()" style="padding: 0.8rem 1.5rem; background: linear-gradient(135deg, #4285f4, #34a853); color: white; border: none; border-radius: 5px; cursor: pointer;">
+                            Send
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="medicationsTab">
+                <h3>Recommended Medications</h3>
+                <div class="medication-info" id="medicationInfo">
+                    <div class="alert alert-info">
+                        Select one or more medical conditions in the search form to see recommended medications.
+                    </div>
+                </div>
             </div>
             
             <div class="tab-content" id="healthTab">
@@ -1426,6 +2322,8 @@
         const countryInfo = document.getElementById('countryInfo');
         const vaccineList = document.getElementById('vaccineList');
         const healthInfo = document.getElementById('healthInfo');
+        const personalTips = document.getElementById('personalTips');
+        const medicationInfo = document.getElementById('medicationInfo');
         const errorMessage = document.getElementById('errorMessage');
         const tabs = document.querySelectorAll('.tab');
         const tabContents = document.querySelectorAll('.tab-content');
@@ -1584,7 +2482,14 @@
                     throw new Error('Country data not found');
                 }
 
+                // Get user age and medical conditions
+                const ageInput = document.getElementById('age');
+                const age = ageInput && ageInput.value ? parseInt(ageInput.value) : null;
+                const selectedConditions = Array.from(document.querySelectorAll('input[name="conditions"]:checked')).map(checkbox => checkbox.value);
+
                 console.log('Selected Country Data:', countryData);
+                console.log('User Age:', age);
+                console.log('User Medical Conditions:', selectedConditions);
 
                 // Generate vaccine recommendations using Gemini API
                 const vaccinePrompt = `You are a medical expert providing vaccine recommendations for travelers. 
@@ -1596,27 +2501,17 @@
                 - Languages: ${Object.values(countryData.languages || {}).join(', ')}
                 - Capital: ${countryData.capital?.[0] || 'N/A'}
                 
-                Consider:
-                1. Regional disease risks
-                2. Local health conditions
-                3. Population density
-                4. Healthcare infrastructure
-                5. Recent disease outbreaks
-                
                 Return ONLY a JSON array of vaccine objects in this exact format:
                 [
                     {
                         "name": "vaccine name",
                         "description": "specific reason for this vaccine in this country",
-                        "requirement": "Required",
-                        "riskLevel": "High"
+                        "requirement": "Required/Recommended/Routine",
+                        "riskLevel": "High/Medium/Low"
                     }
-                ]
-                
-                Include 4-6 most important vaccines. Make descriptions specific to the country.`;
+                ]`;
 
                 const vaccineResponse = await callGeminiAPI(vaccinePrompt);
-                console.log('Raw Vaccine Response from Gemini:', vaccineResponse);
                 let vaccines = [];
 
                 if (vaccineResponse) {
@@ -1633,146 +2528,26 @@
                         const parsedVaccines = JSON.parse(cleanedResponse);
                         console.log('Parsed Vaccine Data:', parsedVaccines);
                         
-                        // Validate the structure
                         if (Array.isArray(parsedVaccines) && parsedVaccines.length > 0) {
-                            vaccines = parsedVaccines.map(vaccine => ({
-                                name: vaccine.name || 'Unknown Vaccine',
-                                description: vaccine.description || 'No description available',
-                                requirement: vaccine.requirement || 'Recommended',
-                                riskLevel: vaccine.riskLevel || 'Medium'
-                            }));
+                            vaccines = parsedVaccines;
                         }
                     } catch (error) {
                         console.error('Error parsing vaccine data:', error);
+                        vaccines = getFallbackVaccines(countryData);
                     }
-                }
-
-                // Fallback to region-specific recommendations if Gemini API fails
-                if (vaccines.length === 0) {
-                    console.log('Using fallback vaccine recommendations');
-                    // Basic vaccines for all countries
-                    vaccines = [
-                        {
-                            name: "MMR",
-                            description: "Protects against measles, mumps, and rubella. Essential for international travel.",
-                            requirement: "Routine",
-                            riskLevel: "Low"
-                        },
-                        {
-                            name: "Tdap",
-                            description: "Protects against tetanus, diphtheria, and pertussis. Recommended for all travelers.",
-                            requirement: "Routine",
-                            riskLevel: "Low"
-                        }
-                    ];
-
-                    // Region-specific vaccines
-                    if (countryData.region === "Africa" || countryData.subregion?.includes("Africa")) {
-                        vaccines.push(
-                            {
-                                name: "Yellow Fever",
-                                description: `Required for entry to ${countryData.name.common}. High risk in this region.`,
-                                requirement: "Required",
-                                riskLevel: "High"
-                            },
-                            {
-                                name: "Hepatitis A",
-                                description: "High risk of food and water-borne transmission in this region.",
-                                requirement: "Recommended",
-                                riskLevel: "High"
-                            },
-                            {
-                                name: "Typhoid",
-                                description: "Common in areas with limited access to clean water and food safety concerns.",
-                                requirement: "Recommended",
-                                riskLevel: "High"
-                            }
-                        );
-                    } else if (countryData.region === "Asia" || countryData.subregion?.includes("Asia")) {
-                        vaccines.push(
-                            {
-                                name: "Hepatitis A",
-                                description: "Prevalent in many Asian countries. High risk of transmission.",
-                                requirement: "Recommended",
-                                riskLevel: "High"
-                            },
-                            {
-                                name: "Typhoid",
-                                description: "Common in areas with varying food safety standards.",
-                                requirement: "Recommended",
-                                riskLevel: "High"
-                            },
-                            {
-                                name: "Japanese Encephalitis",
-                                description: "Risk in rural areas, especially during monsoon season.",
-                                requirement: "Recommended",
-                                riskLevel: "Medium"
-                            }
-                        );
-                    } else if (countryData.region === "Americas" || countryData.subregion?.includes("America")) {
-                        vaccines.push(
-                            {
-                                name: "Hepatitis A",
-                                description: "Varying risk levels across different regions of the Americas.",
-                                requirement: "Recommended",
-                                riskLevel: "Medium"
-                            },
-                            {
-                                name: "Typhoid",
-                                description: "Risk varies by region and local sanitation conditions.",
-                                requirement: "Recommended",
-                                riskLevel: "Medium"
-                            }
-                        );
-                    }
-
-                    // Add population density based recommendations
-                    if (countryData.population > 100000000) {
-                        vaccines.push(
-                            {
-                                name: "COVID-19",
-                                description: "High population density increases transmission risk.",
-                                requirement: "Recommended",
-                                riskLevel: "High"
-                            },
-                            {
-                                name: "Influenza",
-                                description: "Seasonal flu risk increased in densely populated areas.",
-                                requirement: "Recommended",
-                                riskLevel: "Medium"
-                            }
-                        );
-                    }
+                } else {
+                    vaccines = getFallbackVaccines(countryData);
                 }
 
                 // Generate health information using Gemini API
                 const healthPrompt = `Generate comprehensive health information for travelers visiting ${countryData.name.common}.
-                Consider the following information:
-                - Region: ${countryData.region}${countryData.subregion ? ` (${countryData.subregion})` : ''}
-                - Population: ${countryData.population}
-                - Languages: ${Object.values(countryData.languages || {}).join(', ')}
-                - Capital: ${countryData.capital?.[0] || 'N/A'}
-                - Currencies: ${Object.values(countryData.currencies || {}).map(curr => `${curr.name} (${curr.symbol || 'N/A'})`).join(', ')}
-                
-                Include information about:
-                1. Disease risks and health concerns
-                2. Medical facilities and healthcare access
-                3. Water and food safety
-                4. Local conditions and environmental factors
-                5. Cultural considerations related to health
-                
-                Format the response in HTML with appropriate paragraphs and lists.`;
+                Consider the region, climate, healthcare infrastructure, and common health risks.
+                Format the response in HTML with clear sections and bullet points.`;
 
-                let healthInfo = await callGeminiAPI(healthPrompt);
-                console.log('Health Info Response from Gemini:', healthInfo);
+                const healthInfo = await callGeminiAPI(healthPrompt) || generateHealthInfo(countryData);
 
-                // Fallback to basic health info if Gemini API fails
-                if (!healthInfo) {
-                    console.log('Using fallback health information');
-                    healthInfo = generateHealthInfo(countryData);
-                }
-                
-                displayResults(countryData, vaccines, healthInfo);
+                // Display results
+                await displayResults(countryData, vaccines, healthInfo, null, generateMedicationRecommendations(selectedConditions, countryData));
             } catch (error) {
                 console.error('Error:', error);
                 showError('Failed to fetch recommendations. Please try again later.');
@@ -1849,7 +2624,7 @@
         }
 
         // Display results
-        function displayResults(countryData, vaccineData, healthData) {
+        async function displayResults(countryData, vaccineData, healthData, personalTipsData, medicationData) {
             // Update country info with proper flag URL
             countryInfo.innerHTML = `
                 <img class="country-flag" src="${countryData.flags.png}" 
@@ -1864,7 +2639,7 @@
             // Clear previous vaccine list
             vaccineList.innerHTML = '';
             
-            // Sort vaccines: required first, then by risk level
+            // Sort and display vaccines
             vaccineData.sort((a, b) => {
                 const reqPriority = { required: 0, recommended: 1, routine: 2 };
                 const reqDiff = (reqPriority[a.requirement.toLowerCase()] || 3) - (reqPriority[b.requirement.toLowerCase()] || 3);
@@ -1874,7 +2649,6 @@
                 return (riskPriority[a.riskLevel.toLowerCase()] || 3) - (riskPriority[b.riskLevel.toLowerCase()] || 3);
             });
             
-            // Populate vaccine list
             vaccineData.forEach(vaccine => {
                 const riskClass = vaccine.riskLevel.toLowerCase() === 'high' ? 'risk-high' : 
                                  vaccine.riskLevel.toLowerCase() === 'medium' ? 'risk-medium' : '';
@@ -1898,7 +2672,6 @@
                     </div>
                 `;
                 
-                // Add click handler for vaccine details
                 li.onclick = () => showVaccineDetails(vaccine);
                 li.style.cursor = 'pointer';
                 
@@ -1907,6 +2680,25 @@
             
             // Update health info
             healthInfo.innerHTML = healthData;
+
+            try {
+                // Generate and update personal tips
+                const tips = await generatePersonalizedTips(countryData, 
+                    document.getElementById('age').value,
+                    Array.from(document.querySelectorAll('input[name="conditions"]:checked')).map(cb => cb.value),
+                    vaccineData
+                );
+                personalTips.innerHTML = tips;
+            } catch (error) {
+                console.error('Error generating personal tips:', error);
+                personalTips.innerHTML = `<div class="alert alert-warning">
+                    <strong>Note:</strong> There was an issue generating personalized recommendations. 
+                    Please try refreshing the page or contact support if the issue persists.
+                </div>`;
+            }
+            
+            // Update medication recommendations
+            medicationInfo.innerHTML = medicationData;
             
             // Show results
             resultsContainer.style.display = 'block';
@@ -1920,40 +2712,367 @@
             // Scroll to results
             resultsContainer.scrollIntoView({ behavior: 'smooth' });
         }
-        
+
+        // Function to generate personalized tips based on age and medical conditions
+        async function generatePersonalizedTips(countryData, age, conditions, vaccines) {
+            if (!age && (!conditions || conditions.length === 0)) {
+                return `<div class="alert alert-info">
+                    Please provide your age and/or medical conditions for personalized health recommendations.
+                </div>`;
+            }
+
+            try {
+                const prompt = `As a medical travel expert, provide detailed personalized health recommendations for a traveler:
+
+                Destination: ${countryData.name.common}
+                Region: ${countryData.region}
+                Age: ${age || 'Not specified'}
+                
+                General Health Information:
+                ${universalHealthDescription || 'No general health information provided'}
+                
+                Selected Medical Conditions:
+                ${conditions.map(condition => 
+                    condition.startsWith('custom_') ? 
+                    condition.replace('custom_', '').replace(/_/g, ' ') : 
+                    condition
+                ).join(', ')}
+                
+                Required Vaccines: ${vaccines.map(v => v.name).join(', ')}
+
+                Please provide comprehensive HTML-formatted advice including:
+                [Previous sections remain the same...]`;
+
+                const response = await callGeminiAPI(prompt);
+                
+                if (response) {
+                    return `
+                        <div class="personalized-tips-container">
+                            ${response}
+                            <div class="alert alert-info mt-3">
+                                <strong>Note:</strong> These recommendations are personalized based on your profile. Always consult with your healthcare provider before travel.
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    throw new Error('Failed to generate personalized recommendations');
+                }
+            } catch (error) {
+                console.error('Error generating personalized tips:', error);
+                return generateFallbackTips(countryData, age, conditions, vaccines);
+            }
+        }
+
+        // Initialize chat functionality
+        function initializeChat() {
+            const chatInput = document.getElementById('chatInput');
+            const sendButton = document.getElementById('sendMessage');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            // Welcome message
+            addBotMessage("Hello! I'm your TravelHealth Assistant. How can I help you with your travel health concerns?");
+            
+            async function handleUserMessage(message) {
+                // Add user message to chat
+                addUserMessage(message);
+                
+                // Generate context-aware prompt
+                const selectedCountry = document.getElementById('country').value;
+                const age = document.getElementById('age').value;
+                const conditions = Array.from(document.querySelectorAll('input[name="conditions"]:checked'))
+                    .map(checkbox => checkbox.value);
+                
+                const chatPrompt = `As a medical travel expert, answer the following question for a traveler with this profile:
+
+                Question: ${message}
+                Destination: ${selectedCountry}
+                Age: ${age || 'Not specified'}
+                Medical Conditions: ${conditions.join(', ') || 'None specified'}
+                
+                Provide a clear, concise, and helpful response focusing on travel health aspects.`;
+                
+                try {
+                    const response = await callGeminiAPI(chatPrompt);
+                    if (response) {
+                        addBotMessage(response);
+                    } else {
+                        addBotMessage("I apologize, but I'm having trouble generating a response. Please try asking your question in a different way.");
+                    }
+                } catch (error) {
+                    console.error('Chat error:', error);
+                    addBotMessage("I apologize, but I'm having trouble connecting. Please try again later.");
+                }
+            }
+            
+            function addUserMessage(message) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'chat-message user-message';
+                messageDiv.textContent = message;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            function addBotMessage(message) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'chat-message bot-message';
+                messageDiv.innerHTML = message;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            // Event listeners
+            sendButton.addEventListener('click', () => {
+                const message = chatInput.value.trim();
+                if (message) {
+                    handleUserMessage(message);
+                    chatInput.value = '';
+                }
+            });
+            
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const message = chatInput.value.trim();
+                    if (message) {
+                        handleUserMessage(message);
+                        chatInput.value = '';
+                    }
+                }
+            });
+        }
+
+        // Initialize chat when document is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeChat();
+        });
+
+        // Function to generate medication recommendations based on conditions
+        function generateMedicationRecommendations(conditions, countryData) {
+            if (!conditions || conditions.length === 0) {
+                return `<div class="alert alert-info">
+                    Please select one or more medical conditions to see recommended medications.
+                </div>`;
+            }
+
+            const medicationPrompt = `As a medical travel expert, provide medication recommendations for a traveler with the following conditions:
+            Medical Conditions: ${conditions.join(', ')}
+            Destination: ${countryData.name.common}
+            Region: ${countryData.region}
+
+            For each condition, provide:
+            1. Essential medications
+            2. Backup/emergency medications
+            3. Over-the-counter supplements
+            4. Special storage requirements
+            5. Local availability information
+            
+            Format the response in HTML with clear sections for each condition.`;
+
+            // Call Gemini API for medication recommendations
+            callGeminiAPI(medicationPrompt).then(response => {
+                if (response) {
+                    medicationInfo.innerHTML = `
+                        <div class="medication-recommendations">
+                            ${response}
+                        </div>
+                    `;
+                } else {
+                    medicationInfo.innerHTML = generateFallbackMedications(conditions, countryData);
+                }
+            }).catch(error => {
+                console.error('Error generating medication recommendations:', error);
+                medicationInfo.innerHTML = generateFallbackMedications(conditions, countryData);
+            });
+
+            // Return loading state while API call is in progress
+            return `<div class="medication-loading">
+                <div class="loading-spinner"></div>
+                <p>Generating medication recommendations...</p>
+            </div>`;
+        }
+
+        // Fallback medication recommendations
+        function generateFallbackMedications(conditions, countryData) {
+            const recommendations = [];
+            
+            if (conditions.includes('diabetes')) {
+                recommendations.push(`
+                    <div class="medication-category">
+                        <h4>Diabetes Medications</h4>
+                        <div class="medication-list">
+                            <div class="medication-item">
+                                <div class="medication-name">
+                                    <span class="medication-icon">💉</span> Insulin and Supplies
+                                </div>
+                                <div class="medication-description">
+                                    <ul>
+                                        <li>Bring extra insulin and supplies</li>
+                                        <li>Pack insulin cooling case</li>
+                                        <li>Carry prescription documentation</li>
+                                        <li>Bring glucose monitoring supplies</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="medication-item">
+                                <div class="medication-name">
+                                    <span class="medication-icon">💊</span> Oral Medications
+                                </div>
+                                <div class="medication-description">
+                                    <ul>
+                                        <li>Pack metformin or other prescribed medications</li>
+                                        <li>Bring backup prescriptions</li>
+                                        <li>Consider time zone adjustments</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            }
+
+            if (conditions.includes('hypertension')) {
+                recommendations.push(`
+                    <div class="medication-category">
+                        <h4>Blood Pressure Medications</h4>
+                        <div class="medication-list">
+                            <div class="medication-item">
+                                <div class="medication-name">
+                                    <span class="medication-icon">❤️</span> Essential Medications
+                                </div>
+                                <div class="medication-description">
+                                    <ul>
+                                        <li>Blood pressure medications (30-day supply)</li>
+                                        <li>Backup prescriptions</li>
+                                        <li>Blood pressure monitor</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            }
+
+            if (conditions.includes('respiratory')) {
+                recommendations.push(`
+                    <div class="medication-category">
+                        <h4>Respiratory Medications</h4>
+                        <div class="medication-list">
+                            <div class="medication-item">
+                                <div class="medication-name">
+                                    <span class="medication-icon">🫁</span> Inhalers and Medications
+                                </div>
+                                <div class="medication-description">
+                                    <ul>
+                                        <li>Rescue inhaler (multiple)</li>
+                                        <li>Maintenance inhalers</li>
+                                        <li>Oral steroids if prescribed</li>
+                                        <li>Peak flow meter</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            }
+
+            if (conditions.includes('allergies') || conditions.includes('food_allergies') || conditions.includes('drug_allergies')) {
+                recommendations.push(`
+                    <div class="medication-category">
+                        <h4>Allergy Medications</h4>
+                        <div class="medication-list">
+                            <div class="medication-item">
+                                <div class="medication-name">
+                                    <span class="medication-icon">💊</span> Essential Medications
+                                </div>
+                                <div class="medication-description">
+                                    <ul>
+                                        <li>Antihistamines</li>
+                                        <li>EpiPen if prescribed</li>
+                                        <li>Allergy documentation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            }
+
+            // Add general travel medications for all conditions
+            recommendations.push(`
+                <div class="medication-category">
+                    <h4>General Travel Medications</h4>
+                    <div class="medication-list">
+                        <div class="medication-item">
+                            <div class="medication-name">
+                                <span class="medication-icon">🧳</span> Essential Travel Kit
+                            </div>
+                            <div class="medication-description">
+                                <ul>
+                                    <li>Pain relievers (acetaminophen/ibuprofen)</li>
+                                    <li>Anti-diarrheal medication</li>
+                                    <li>Basic first aid supplies</li>
+                                    <li>Oral rehydration salts</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `);
+
+            return `
+                <div class="medication-recommendations">
+                    ${recommendations.join('')}
+                    <div class="alert alert-info mt-3">
+                        <strong>Important:</strong> Always consult with your healthcare provider before travel and carry:
+                        <ul>
+                            <li>Original prescriptions and medical documentation</li>
+                            <li>Letter from your doctor describing your conditions</li>
+                            <li>Medications in original packaging</li>
+                            <li>Extra supplies in case of travel delays</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
         // Show loader
         function showLoader() {
             loader.style.display = 'block';
             resultsContainer.style.display = 'none';
             errorMessage.style.display = 'none';
             
-            loader.innerHTML = `
-                <div class="loader-scene">
-                    <div class="doctor">👨‍⚕️</div>
-                    <div class="patient">🧑</div>
-                    <div class="syringe" style="left: 45%; top: 40%;">💉</div>
-                    <div class="medicine" style="left: 35%; top: 50%;">💊</div>
-                    <div class="medicine" style="left: 55%; top: 45%;">🧪</div>
-                    <div class="heart" style="left: 48%; top: 35%;">❤️</div>
-                    <div class="sparkle" style="left: 40%; top: 45%;">✨</div>
-                    <div class="sparkle" style="left: 60%; top: 40%;">✨</div>
-                    <div class="health-items">
-                        <div class="health-item">🦠</div>
-                        <div class="health-item">🧬</div>
-                        <div class="health-item">🔬</div>
-                        <div class="health-item">🏥</div>
-                    </div>
-                    <div class="loading-stage"></div>
-                </div>
-                <div class="loader-text">
-                    Preparing your travel health plan<span class="loading-dots"></span>
-                </div>
-            `;
+            const statusMessages = [
+                'Analyzing destination health data...',
+                'Checking regional disease risks...',
+                'Reviewing vaccine requirements...',
+                'Customizing recommendations...',
+                'Preparing your personalized travel plan...',
+                'Almost ready...'
+            ];
+            
+            let messageIndex = 0;
+            const statusText = document.querySelector('.status-text');
+            
+            // Clear any existing intervals
+            if (window.statusInterval) {
+                clearInterval(window.statusInterval);
+            }
+            
+            // Update status message every 2.5 seconds
+            window.statusInterval = setInterval(() => {
+                messageIndex = (messageIndex + 1) % statusMessages.length;
+                statusText.textContent = statusMessages[messageIndex];
+            }, 2500);
         }
         
         // Hide loader
         function hideLoader() {
             loader.style.display = 'none';
+            
+            // Clear status message interval
+            if (window.statusInterval) {
+                clearInterval(window.statusInterval);
+                window.statusInterval = null;
+            }
         }
         
         // Show error message
@@ -2093,60 +3212,122 @@
 
         // Function to get vaccine details
         function getVaccineDetails(vaccineName) {
-            // This would typically come from an API or database
-            // For now, returning mock data
-            const vaccineDetails = {
-                'MMR': {
-                    administration: 'Subcutaneous injection',
+            const vaccineDatabase = {
+                'Yellow Fever': {
+                    administration: 'Single subcutaneous injection',
                     dosage: '0.5 mL',
-                    schedule: '2 doses, 4 weeks apart',
+                    schedule: 'Single dose provides lifelong protection',
                     precautions: [
-                        'Pregnancy',
-                        'Severe immunodeficiency',
-                        'Recent blood transfusion',
-                        'Allergy to neomycin'
+                        'Pregnancy - generally contraindicated',
+                        'Immunosuppression',
+                        'Age under 6 months',
+                        'Severe egg allergy',
+                        'HIV with low CD4 counts'
                     ],
                     sideEffects: [
-                        'Mild fever',
-                        'Rash',
-                        'Swollen glands',
-                        'Joint pain'
+                        'Mild fever and headache (common)',
+                        'Muscle aches',
+                        'Site injection pain',
+                        'Rare serious reactions within 30 minutes',
+                        'Very rare neurological complications'
                     ],
-                    recommendedAge: '12 months and older',
+                    recommendedAge: '9 months and older',
                     protectionDuration: 'Lifetime',
-                    storage: '2-8°C'
+                    storage: '2-8°C, protected from light'
                 },
-                'Tdap': {
-                    administration: 'Intramuscular injection',
-                    dosage: '0.5 mL',
-                    schedule: 'Every 10 years',
+                'Hepatitis A': {
+                    administration: 'Intramuscular injection in deltoid',
+                    dosage: '0.5 mL/1.0 mL (age dependent)',
+                    schedule: 'Two doses: initial and booster at 6-12 months',
                     precautions: [
-                        'History of severe allergic reaction',
-                        'Guillain-Barré syndrome',
-                        'Moderate to severe illness'
+                        'Previous severe reaction',
+                        'Acute moderate/severe illness',
+                        'Pregnancy (assess risk/benefit)',
+                        'Bleeding disorders'
                     ],
                     sideEffects: [
-                        'Pain at injection site',
-                        'Redness and swelling',
-                        'Mild fever',
-                        'Headache'
+                        'Soreness at injection site',
+                        'Mild fatigue',
+                        'Headache',
+                        'Low-grade fever',
+                        'Temporary arm discomfort'
                     ],
-                    recommendedAge: '11 years and older',
-                    protectionDuration: '10 years',
+                    recommendedAge: '1 year and older',
+                    protectionDuration: '20+ years after full series',
+                    storage: '2-8°C, do not freeze'
+                },
+                'Typhoid': {
+                    administration: 'Intramuscular injection or oral capsules',
+                    dosage: '0.5 mL (injectable) or 4 capsules (oral)',
+                    schedule: 'Single injection or 4 oral doses alternate days',
+                    precautions: [
+                        'Acute febrile illness',
+                        'Previous typhoid reaction',
+                        'Severe gastric conditions (for oral)',
+                        'Antibiotics use (for oral vaccine)'
+                    ],
+                    sideEffects: [
+                        'Injection site tenderness',
+                        'Low-grade fever',
+                        'Headache',
+                        'Nausea',
+                        'Abdominal discomfort (oral vaccine)'
+                    ],
+                    recommendedAge: '2 years and older',
+                    protectionDuration: '2-3 years',
                     storage: '2-8°C'
                 },
-                // Add more vaccines as needed
+                'Hepatitis B': {
+                    administration: 'Intramuscular injection',
+                    dosage: '0.5 mL/1.0 mL (age dependent)',
+                    schedule: 'Three doses: 0, 1, 6 months',
+                    precautions: [
+                        'Severe allergic reaction to previous dose',
+                        'Yeast sensitivity',
+                        'Moderate/severe illness',
+                        'Latex allergy (some preparations)'
+                    ],
+                    sideEffects: [
+                        'Injection site pain',
+                        'Fatigue',
+                        'Low-grade fever',
+                        'Headache',
+                        'Muscle aches'
+                    ],
+                    recommendedAge: 'All ages',
+                    protectionDuration: '20+ years to lifetime',
+                    storage: '2-8°C, do not freeze'
+                }
             };
 
-            return vaccineDetails[vaccineName] || {
-                administration: 'As per healthcare provider',
-                dosage: 'Standard dose',
-                schedule: 'As recommended',
-                precautions: ['Consult healthcare provider'],
-                sideEffects: ['Consult healthcare provider'],
-                recommendedAge: 'As per guidelines',
-                protectionDuration: 'Varies',
-                storage: 'As per manufacturer guidelines'
+            // If we have specific data for this vaccine, return it
+            if (vaccineDatabase[vaccineName]) {
+                return vaccineDatabase[vaccineName];
+            }
+
+            // For other vaccines, return a generic template with common information
+            return {
+                administration: 'As per healthcare provider guidelines',
+                dosage: 'As prescribed by healthcare provider',
+                schedule: 'According to medical guidance',
+                precautions: [
+                    'Previous allergic reactions to vaccine components',
+                    'Current acute illness or fever',
+                    'Compromised immune system',
+                    'Pregnancy or planning pregnancy',
+                    'Certain medical conditions'
+                ],
+                sideEffects: [
+                    'Injection site reactions (pain, redness, swelling)',
+                    'Mild fever',
+                    'Fatigue',
+                    'Headache',
+                    'Muscle aches',
+                    'Temporary discomfort'
+                ],
+                recommendedAge: 'As per current guidelines',
+                protectionDuration: 'Varies based on vaccine type',
+                storage: '2-8°C unless specified otherwise'
             };
         }
 
@@ -2204,17 +3385,429 @@
             const welcomePage = document.getElementById('welcomePage');
             const transitionText = document.createElement('div');
             transitionText.className = 'transition-text';
-            transitionText.textContent = 'Getting things ready for you...';
+            transitionText.textContent = 'Welcome to TravelVax';
             document.body.appendChild(transitionText);
 
+            // Reduce delay and add smooth animation
+            welcomePage.style.transition = 'transform 0.5s ease-out, opacity 0.5s ease-out';
+            welcomePage.style.transform = 'translateY(-100%)';
+            welcomePage.style.opacity = '0';
+
             setTimeout(() => {
-                welcomePage.style.transform = 'translateY(-100%)';
-                setTimeout(() => {
-                    welcomePage.style.display = 'none';
-                    document.body.removeChild(transitionText);
-                }, 800);
-            }, 1500);
+                welcomePage.style.display = 'none';
+                document.body.removeChild(transitionText);
+            }, 500); // Reduced from 800ms to 500ms
         }
+
+        // Add this to your existing JavaScript
+        function sendMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const chatMessages = document.getElementById('chatMessages');
+            const message = chatInput.value.trim();
+            
+            if (message) {
+                // Add user message
+                const userDiv = document.createElement('div');
+                userDiv.style.cssText = 'padding: 0.8rem 1rem; border-radius: 10px; max-width: 80%; margin: 0.5rem 0; align-self: flex-end; background: linear-gradient(135deg, #4285f4, #34a853); color: white;';
+                userDiv.textContent = message;
+                chatMessages.appendChild(userDiv);
+                
+                // Clear input
+                chatInput.value = '';
+                
+                // Get context for the AI response
+                const selectedCountry = document.getElementById('country').value;
+                const age = document.getElementById('age').value;
+                const conditions = Array.from(document.querySelectorAll('input[name="conditions"]:checked'))
+                    .map(checkbox => checkbox.value);
+                
+                // Generate AI response using Gemini
+                const prompt = `As a medical travel expert, answer this question:
+                "${message}"
+                
+                Context:
+                - Destination: ${selectedCountry}
+                - Traveler Age: ${age || 'Not specified'}
+                - Medical Conditions: ${conditions.join(', ') || 'None specified'}
+                
+                Provide a clear, helpful response focusing on travel health aspects.`;
+                
+                // Call Gemini API
+                callGeminiAPI(prompt).then(response => {
+                    const botDiv = document.createElement('div');
+                    botDiv.style.cssText = 'padding: 0.8rem 1rem; border-radius: 10px; max-width: 80%; margin: 0.5rem 0; align-self: flex-start; background: #f8f9fa; color: #333;';
+                    botDiv.innerHTML = response || "I apologize, but I'm having trouble generating a response. Please try asking your question in a different way.";
+                    chatMessages.appendChild(botDiv);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }).catch(error => {
+                    console.error('Chat error:', error);
+                    const errorDiv = document.createElement('div');
+                    errorDiv.style.cssText = 'padding: 0.8rem 1rem; border-radius: 10px; max-width: 80%; margin: 0.5rem 0; align-self: flex-start; background: #f8d7da; color: #721c24;';
+                    errorDiv.textContent = "I apologize, but I'm having trouble connecting. Please try again later.";
+                    chatMessages.appendChild(errorDiv);
+                });
+                
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+
+        // Add Enter key support
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Function to add custom health condition
+        function addCustomCondition() {
+            const input = document.getElementById('newCondition');
+            const condition = input.value.trim();
+            
+            if (condition) {
+                const list = document.getElementById('customConditionsList');
+                const tag = document.createElement('div');
+                tag.className = 'custom-condition-tag';
+                
+                // Create hidden checkbox for the condition
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'conditions';
+                checkbox.value = 'custom_' + condition.toLowerCase().replace(/\s+/g, '_');
+                checkbox.checked = true;
+                checkbox.style.display = 'none';
+                
+                tag.innerHTML = `
+                    <div class="condition-name">${condition}</div>
+                    <span class="remove-condition" onclick="removeCustomCondition(this)">×</span>
+                `;
+                
+                tag.appendChild(checkbox);
+                list.appendChild(tag);
+                input.value = '';
+                
+                // Update selected conditions
+                updateSelectedConditions();
+            }
+        }
+
+        // Function to remove custom health condition
+        function removeCustomCondition(element) {
+            element.parentElement.remove();
+        }
+
+        // Enhance the fallback tips function
+        function generateFallbackTips(countryData, age, conditions, vaccines) {
+            const tips = [];
+            
+            // Add age-specific recommendations
+            if (age) {
+                if (age < 12) {
+                    tips.push(`
+                        <div class="tip-section">
+                            <h4>Child-Specific Recommendations</h4>
+                            <ul>
+                                <li>Ensure all childhood vaccinations are up to date</li>
+                                <li>Pack child-appropriate medications and first aid supplies</li>
+                                <li>Consider shorter travel days to prevent fatigue</li>
+                                <li>Bring familiar comfort items to reduce stress</li>
+                            </ul>
+                        </div>
+                    `);
+                } else if (age > 65) {
+                    tips.push(`
+                        <div class="tip-section">
+                            <h4>Senior Travel Recommendations</h4>
+                            <ul>
+                                <li>Schedule regular rest periods during travel</li>
+                                <li>Carry a detailed medical history</li>
+                                <li>Consider travel insurance with medical evacuation coverage</li>
+                                <li>Plan for adequate medication supplies</li>
+                            </ul>
+                        </div>
+                    `);
+                }
+            }
+
+            // Add condition-specific recommendations
+            if (conditions && conditions.length > 0) {
+                tips.push(`
+                    <div class="tip-section">
+                        <h4>Condition-Specific Advice</h4>
+                        <ul>
+                            ${conditions.map(condition => {
+                                if (condition.startsWith('custom_')) {
+                                    const conditionName = condition.replace('custom_', '').replace(/_/g, ' ');
+                                    return `<li>For ${conditionName}, ensure you have:
+                                        <ul>
+                                            <li>Adequate medication supply</li>
+                                            <li>Medical documentation</li>
+                                            <li>Emergency contact information</li>
+                                            <li>Healthcare provider's travel clearance</li>
+                                        </ul>
+                                    </li>`;
+                                }
+                                return getConditionSpecificAdvice(condition);
+                            }).join('')}
+                        </ul>
+                    </div>
+                `);
+            }
+
+            // Add destination-specific health information
+            tips.push(`
+                <div class="tip-section">
+                    <h4>Local Health Information for ${countryData.name.common}</h4>
+                    <ul>
+                        <li>Region: ${countryData.region}</li>
+                        <li>Required Vaccines: ${vaccines.filter(v => v.requirement === 'Required').map(v => v.name).join(', ') || 'None required'}</li>
+                        <li>Recommended Vaccines: ${vaccines.filter(v => v.requirement === 'Recommended').map(v => v.name).join(', ') || 'None additional'}</li>
+                        <li>Emergency Number: ${getEmergencyNumber(countryData.region)}</li>
+                    </ul>
+                </div>
+            `);
+
+            return `
+                <div class="personalized-tips-container">
+                    ${tips.join('')}
+                    <div class="alert alert-warning">
+                        <strong>Important:</strong> This is general travel health information. Please consult with your healthcare provider for personalized medical advice before traveling.
+                    </div>
+                </div>
+            `;
+        }
+
+        // Helper function for condition-specific advice
+        function getConditionSpecificAdvice(condition) {
+            const adviceMap = {
+                diabetes: `<li>For diabetes management:
+                    <ul>
+                        <li>Pack extra insulin and supplies</li>
+                        <li>Carry a cooling case for medication</li>
+                        <li>Bring glucose monitoring equipment</li>
+                        <li>Pack snacks for low blood sugar</li>
+                    </ul>
+                </li>`,
+                hypertension: `<li>For blood pressure management:
+                    <ul>
+                        <li>Pack blood pressure monitor</li>
+                        <li>Maintain medication schedule across time zones</li>
+                        <li>Monitor salt intake while traveling</li>
+                        <li>Stay hydrated during flights</li>
+                    </ul>
+                </li>`,
+                // Add more conditions as needed
+            };
+            
+            return adviceMap[condition] || `<li>For ${condition}:
+                <ul>
+                    <li>Consult with your healthcare provider before travel</li>
+                    <li>Carry necessary medications and documentation</li>
+                    <li>Know local healthcare facilities</li>
+                    <li>Have an emergency plan</li>
+                </ul>
+            </li>`;
+        }
+
+        // Helper function for emergency numbers
+        function getEmergencyNumber(region) {
+            const emergencyNumbers = {
+                'Europe': '112',
+                'Americas': '911',
+                'Asia': 'Varies by country',
+                'Africa': 'Varies by country',
+                'Oceania': '000 (Australia) / 111 (New Zealand)'
+            };
+            
+            return emergencyNumbers[region] || 'Check local emergency numbers';
+        }
+
+        // Add this after the existing checkbox labels
+        document.querySelectorAll('.checkbox-label').forEach(label => {
+            const checkbox = label.querySelector('input[type="checkbox"]');
+            // Keep only the essential checkbox functionality
+            if (checkbox) {
+                checkbox.addEventListener('change', function() {
+                    updateSelectedConditions();
+                });
+            }
+        });
+
+        // Update the custom condition addition function to remove description features
+        function addCustomCondition() {
+            const input = document.getElementById('newCondition');
+            const condition = input.value.trim();
+            
+            if (condition) {
+                const list = document.getElementById('customConditionsList');
+                const tag = document.createElement('div');
+                tag.className = 'custom-condition-tag';
+                
+                // Create hidden checkbox for the condition
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'conditions';
+                checkbox.value = 'custom_' + condition.toLowerCase().replace(/\s+/g, '_');
+                checkbox.checked = true;
+                checkbox.style.display = 'none';
+                
+                tag.innerHTML = `
+                    <div class="condition-name">${condition}</div>
+                    <span class="remove-condition" onclick="removeCustomCondition(this)">×</span>
+                `;
+                
+                tag.appendChild(checkbox);
+                list.appendChild(tag);
+                input.value = '';
+                
+                // Update selected conditions
+                updateSelectedConditions();
+            }
+        }
+
+        // Store condition descriptions
+        const conditionDescriptions = new Map();
+
+        function updateConditionDescription(condition, description) {
+            if (description && description.trim()) {
+                conditionDescriptions.set(condition, description.trim());
+                // Add visual indicator that condition has description
+                const label = document.querySelector(`[value="${condition}"]`).closest('.checkbox-label, .custom-condition-tag');
+                label.classList.add('has-description');
+            } else {
+                conditionDescriptions.delete(condition);
+                const label = document.querySelector(`[value="${condition}"]`).closest('.checkbox-label, .custom-condition-tag');
+                label.classList.remove('has-description');
+            }
+        }
+
+        // Update the generatePersonalizedTips function to include descriptions
+        async function generatePersonalizedTips(countryData, age, conditions, vaccines) {
+            if (!age && (!conditions || conditions.length === 0)) {
+                return `<div class="alert alert-info">
+                    Please provide your age and/or medical conditions for personalized health recommendations.
+                </div>`;
+            }
+
+            try {
+                // Get all conditions with their descriptions
+                const conditionsWithDescriptions = conditions.map(condition => {
+                    const description = conditionDescriptions.get(condition);
+                    const displayName = condition.startsWith('custom_') ? 
+                        condition.replace('custom_', '').replace(/_/g, ' ') : 
+                        condition;
+                    return {
+                        name: displayName,
+                        description: description || 'No additional details provided'
+                    };
+                });
+
+                const prompt = `As a medical travel expert, provide detailed personalized health recommendations for a traveler:
+
+                Destination: ${countryData.name.common}
+                Region: ${countryData.region}
+                Age: ${age || 'Not specified'}
+                Medical Conditions and Details:
+                ${conditionsWithDescriptions.map(c => `- ${c.name}: ${c.description}`).join('\n')}
+                Required Vaccines: ${vaccines.map(v => v.name).join(', ')}
+
+                Please provide comprehensive HTML-formatted advice including:
+
+                1. Key Travel Health Recommendations:
+                - Age-specific health concerns and precautions
+                - Detailed management strategies for each medical condition
+                - Required medical preparations and documentation
+                - Specific vaccine considerations based on conditions
+
+                2. Local Healthcare Information:
+                - Nearest hospitals and clinics
+                - Emergency numbers and procedures
+                - Healthcare quality assessment
+                - Insurance requirements and recommendations
+                - Language considerations for medical care
+
+                3. Climate & Environmental Impact:
+                - Weather effects on medical conditions
+                - Altitude considerations if relevant
+                - Air quality and pollution levels
+                - Local disease risks and prevention
+                - Seasonal health considerations
+
+                4. Medication & Treatment Planning:
+                - Medication availability in destination
+                - Local prescription requirements
+                - Backup medication recommendations
+                - Storage requirements in local climate
+                - Emergency medication access
+
+                5. Daily Health Management:
+                - Condition-specific dietary advice
+                - Physical activity modifications
+                - Stress management techniques
+                - Sleep and jet lag strategies
+                - Monitoring and tracking recommendations
+
+                6. Emergency Preparedness:
+                - Condition-specific emergency plans
+                - Local emergency response information
+                - Medical evacuation options
+                - Important phrases in local language
+                - Emergency contact protocol
+
+                Format the response in clear HTML with:
+                - Bulleted lists for easy reading
+                - Important warnings in bold
+                - Clear section headings
+                - Practical, actionable advice
+                - Emergency information highlighted
+
+                Return only the formatted HTML content.`;
+
+                const response = await callGeminiAPI(prompt);
+                
+                if (response) {
+                    return `
+                        <div class="personalized-tips-container">
+                            ${response}
+                            <div class="alert alert-info mt-3">
+                                <strong>Note:</strong> These recommendations are personalized based on your profile. Always consult with your healthcare provider before travel.
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    throw new Error('Failed to generate personalized recommendations');
+                }
+            } catch (error) {
+                console.error('Error generating personalized tips:', error);
+                return generateFallbackTips(countryData, age, conditions, vaccines);
+            }
+        }
+
+        // Add this to your existing JavaScript
+        let universalHealthDescription = '';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const universalHealthTextarea = document.getElementById('universalHealthInfo');
+            const healthInfoPreview = document.getElementById('healthInfoPreview');
+
+            if (universalHealthTextarea) {
+                universalHealthTextarea.addEventListener('input', function(e) {
+                    universalHealthDescription = e.target.value;
+                    updateHealthInfoPreview();
+                });
+            }
+
+            function updateHealthInfoPreview() {
+                if (healthInfoPreview) {
+                    if (universalHealthDescription.trim()) {
+                        healthInfoPreview.style.display = 'block';
+                        healthInfoPreview.innerHTML = `<strong>Your Health Summary:</strong><br>${universalHealthDescription}`;
+                    } else {
+                        healthInfoPreview.style.display = 'none';
+                    }
+                }
+            }
+        });
     </script>
 </body>
 </html>
