@@ -1421,129 +1421,77 @@
         }
         
         .globe-container {
-            position: relative;
-            width: 180px;
-            height: 180px;
-            margin-bottom: 20px;
+            display: none;
         }
         
-        .globe {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(45deg, #4facfe, #00f2fe);
-            border-radius: 50%;
-            top: 15px;
-            left: 15px;
-            overflow: hidden;
-            box-shadow: 
-                inset 0 0 20px rgba(255, 255, 255, 0.8),
-                0 0 15px rgba(79, 172, 254, 0.6);
-            animation: globePulse 3s ease-in-out infinite;
-        }
-        
-        .globe::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6bm9uZTtzdHJva2U6cmdiYSgyNTUsMjU1LDI1NSwwLjMpO3N0cm9rZS1taXRlcmxpbWl0OjEwO3N0cm9rZS13aWR0aDowLjc1cHg7fTwvc3R5bGU+PC9kZWZzPjxjaXJjbGUgY2xhc3M9ImNscy0xIiBjeD0iMTAwIiBjeT0iMTAwIiByPSI5OSIvPjxjaXJjbGUgY2xhc3M9ImNscy0xIiBjeD0iMTAwIiBjeT0iMTAwIiByPSI2NiIvPjxjaXJjbGUgY2xhc3M9ImNscy0xIiBjeD0iMTAwIiBjeT0iMTAwIiByPSIzMyIvPjxsaW5lIGNsYXNzPSJjbHMtMSIgeDE9IjEiIHkxPSIxMDAiIHgyPSIxOTkiIHkyPSIxMDAiLz48bGluZSBjbGFzcz0iY2xzLTEiIHgxPSIxMDAiIHkxPSIxIiB4Mj0iMTAwIiB5Mj0iMTk5Ii8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTAwLDFhMTgzLjQ4LDE4My40OCwwLDAsMSwwLDE5OCIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEwMCwxYTE4My40OCwxODMuNDgsMCwwLDAsMCwxOTgiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zNCw1MGExNTYuMTYsMTU2LjE2LDAsMCwwLDAsMTAwIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTY2LDUwYTE1Ni4xNiwxNTYuMTYsMCwwLDAsMCwxMDAiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xLDUwQTE1Ni4xNiwxNTYuMTYsMCwwLDEsMTk5LDUwIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMSwxNTBBMTU2LjE2LDE1Ni4xNiwwLDAsMSwxOTksMTUwIi8+PC9zdmc+');
-            background-size: 75% 75%;
-            background-position: center;
-            background-repeat: no-repeat;
-            animation: globeRotate 20s linear infinite;
-            opacity: 0.7;
-        }
-        
-        .globe::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 80%);
-            border-radius: 50%;
-        }
-        
-        .plane {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background-color: transparent;
-            color: #fff;
-            font-size: 25px;
-            top: 75px;
-            left: 75px;
-            z-index: 10;
-            animation: planeOrbit 8s linear infinite;
-            transform-origin: center;
-        }
-        
-        .vaccine-icon {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            color: #fff;
-            font-size: 25px;
-            top: 35px;
-            left: 75px;
-            z-index: 10;
-            animation: vaccineOrbit 12s linear infinite reverse;
-            transform-origin: center;
-        }
-        
-        .health-icon {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            color: #fff;
-            font-size: 25px;
-            top: 75px;
-            left: 35px;
-            z-index: 10;
-            animation: healthOrbit 10s linear infinite;
-            transform-origin: center;
-        }
-        
-        .orbit {
-            position: absolute;
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            border: 1px dashed rgba(255, 255, 255, 0.3);
-            top: -20px;
-            left: -20px;
-            z-index: 1;
+        .globe, .plane, .vaccine-icon, .health-icon, .orbit {
+            display: none;
         }
         
         .loading-bar-container {
+            width: 100%;
+            max-width: 300px;
+            margin: 2rem auto;
             position: relative;
-            width: 200px;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3px;
             overflow: hidden;
-            margin-top: 5px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(66, 133, 244, 0.2);
         }
         
         .loading-bar {
-            position: absolute;
-            height: 100%;
-            background: linear-gradient(to right, #4facfe, #00f2fe);
-            border-radius: 10px;
-            animation: loadingProgress 2.5s ease-in-out infinite;
+            height: 6px;
+            background: linear-gradient(90deg, #4285f4, #34a853, #fbbc05, #ea4335);
+            background-size: 300% 100%;
+            border-radius: 20px;
+            animation: gradientMove 2s ease infinite;
         }
         
         .loading-message {
-            font-size: 1.1rem;
-            color: #4facfe;
+            text-align: center;
+            color: #4285f4;
+            font-size: 1.2rem;
             font-weight: 500;
-            margin-bottom: 10px;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            padding: 0.5rem;
+            width: 100%;
+            max-width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .loading-message::before {
+            content: '✚';
+            display: inline-block;
+            animation: pulseCross 1.5s ease infinite;
+            color: #34a853;
+        }
+        
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+                width: 0%;
+            }
+            50% {
+                width: 100%;
+            }
+            100% {
+                background-position: 100% 50%;
+                width: 0%;
+            }
+        }
+        
+        @keyframes pulseCross {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
         }
         
         .status-text {
@@ -1695,17 +1643,18 @@
             width: 40px;
             height: 40px;
             border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--primary-color);
+            border-top: 4px solid #4285f4;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin: 20px auto;
         }
 
         .medication-loading {
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             padding: 2rem;
-            background: var(--light-bg);
-            border-radius: 10px;
         }
 
         @keyframes spin {
@@ -2212,18 +2161,10 @@
         
         <div class="loader" id="loader">
             <div class="modern-loader">
-                <div class="globe-container">
-                    <div class="orbit"></div>
-                    <div class="globe"></div>
-                    <div class="plane">✈️</div>
-                    <div class="vaccine-icon">💉</div>
-                    <div class="health-icon">🩺</div>
-                </div>
                 <div class="loading-message">Preparing Your Travel Health Plan</div>
                 <div class="loading-bar-container">
                     <div class="loading-bar"></div>
                 </div>
-                <div class="status-text status-change">Analyzing destination health data...</div>
             </div>
         </div>
         
@@ -2314,6 +2255,8 @@
     </footer>
 
     <script>
+       
+
         // DOM Elements
         const countrySelect = document.getElementById('country');
         const searchForm = document.getElementById('searchForm');
@@ -2331,75 +2274,74 @@
         // API endpoints and configuration
         const REST_COUNTRIES_API = 'https://restcountries.com/v3.1';
         const GEMINI_API_KEY = 'AIzaSyCBhTkjvvVDYopdn8_MPv6fTalSMTsSW3c';
-        const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent';
-
+        const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent';
         // Function to call Gemini API with safety settings
         async function callGeminiAPI(prompt) {
-            try {
-                console.log('Calling Gemini 1.5 Pro API...');
-                
-                if (!GEMINI_API_KEY) {
-                    throw new Error('Please configure a valid Gemini API key');
-                }
-
-                const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [{
-                                text: prompt
-                            }]
-                        }],
-                        safetySettings: [
-                            {
-                                category: "HARM_CATEGORY_HARASSMENT",
-                                threshold: "BLOCK_NONE"
-                            },
-                            {
-                                category: "HARM_CATEGORY_HATE_SPEECH",
-                                threshold: "BLOCK_NONE"
-                            },
-                            {
-                                category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-                                threshold: "BLOCK_NONE"
-                            },
-                            {
-                                category: "HARM_CATEGORY_DANGEROUS_CONTENT",
-                                threshold: "BLOCK_NONE"
-                            }
-                        ],
-                        generationConfig: {
-                            temperature: 0.7,
-                            topK: 40,
-                            topP: 0.95,
-                            maxOutputTokens: 1024
-                        }
-                    })
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.text();
-                    console.error('Gemini API Error Response:', errorData);
-                    throw new Error(`Gemini API failed with status: ${response.status}. ${errorData}`);
-                }
-
-                const data = await response.json();
-                console.log('Gemini API Response:', data);
-                
-                if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
-                    throw new Error('Invalid response format from Gemini API');
-                }
-
-                return data.candidates[0].content.parts[0].text;
-            } catch (error) {
-                console.error('Error calling Gemini API:', error.message);
-                showError(`API Error: ${error.message}. Using fallback data.`);
-                return null;
-            }
+    try {
+        console.log('Calling Gemini 1.5 Flash API...');
+        
+        if (!GEMINI_API_KEY) {
+            throw new Error('Please configure a valid Gemini API key');
         }
+
+        const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{
+                        text: prompt
+                    }]
+                }],
+                safetySettings: [
+                    {
+                        category: "HARM_CATEGORY_HARASSMENT",
+                        threshold: "BLOCK_NONE"
+                    },
+                    {
+                        category: "HARM_CATEGORY_HATE_SPEECH",
+                        threshold: "BLOCK_NONE"
+                    },
+                    {
+                        category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                        threshold: "BLOCK_NONE"
+                    },
+                    {
+                        category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+                        threshold: "BLOCK_NONE"
+                    }
+                ],
+                generationConfig: {
+                    temperature: 0.7,
+                    topK: 40,
+                    topP: 0.95,
+                    maxOutputTokens: 2048  // Increased from 1024 for Flash model
+                }
+            })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.text();
+            console.error('Gemini API Error Response:', errorData);
+            throw new Error(`Gemini API failed with status: ${response.status}. ${errorData}`);
+        }
+
+        const data = await response.json();
+        console.log('Gemini API Response:', data);
+        
+        if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+            throw new Error('Invalid response format from Gemini API');
+        }
+
+        return data.candidates[0].content.parts[0].text;
+    } catch (error) {
+        console.error('Error calling Gemini API:', error.message);
+        showError(`API Error: ${error.message}. Using fallback data.`);
+        return null;
+    }
+}
 
         // Fetch countries from REST Countries API
         async function fetchCountries() {
@@ -3090,17 +3032,44 @@
         }
         
         // Tab functionality
-        function setupTabs() {
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tabContents.forEach(content => content.classList.remove('active'));
-                    
-                    tab.classList.add('active');
-                    document.getElementById(`${tab.dataset.tab}Tab`).classList.add('active');
-                });
-            });
-        }
+        let cachedMedicationHTML = null; // store medication results once
+
+function setupTabs() {
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Switch tab visuals
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            tab.classList.add('active');
+            const tabId = `${tab.dataset.tab}Tab`;
+            document.getElementById(tabId).classList.add('active');
+
+            // If Medications tab clicked, load (or reuse) data
+            if (tab.dataset.tab === 'medications') {
+                const medicationInfo = document.getElementById('medicationInfo');
+
+                if (cachedMedicationHTML) {
+                    medicationInfo.innerHTML = cachedMedicationHTML; // reuse
+                } else {
+                    const selectedCountry = document.getElementById('country').value;
+                    const selectedConditions = Array.from(document.querySelectorAll('input[name="conditions"]:checked')).map(cb => cb.value);
+                    const countryData = window.countriesData?.find(c => c.name.common === selectedCountry);
+
+                    if (countryData && selectedConditions.length > 0) {
+                        const generatedHTML = generateMedicationRecommendations(selectedConditions, countryData);
+                        medicationInfo.innerHTML = generatedHTML;
+                        cachedMedicationHTML = generatedHTML; // cache it
+                    }
+                }
+            }
+        });
+    });
+}
+
         
         // Initialize the application
         function init() {
